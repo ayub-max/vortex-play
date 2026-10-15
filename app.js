@@ -1230,8 +1230,140 @@
         "now": "$34.90",
         "value": 34.9
       },
-      "upcoming": true
-    }
+    },
+  "Neon Drift Pro": {
+    "img": "images/sonic-unleashed.jpg",
+    "shots": ["images/gta-5.jpg", "images/watch-dogs-legion.jpg", "images/far-cry-4.jpg"],
+    "genre": "Racing · Arcade",
+    "tags": ["Racing", "Arcade", "Speed", "Controller"],
+    "short": "Ultra-fast neon circuits where one wrong turn ends the run.",
+    "about": "A pure arcade racer built for short intense sessions. Drift through glowing tunnels, hit boost pads and beat ghost recordings of your best laps. Leaderboards update every hour.",
+    "features": ["Ghost races", "Boost pads", "Hourly leaderboards", "Controller support"],
+    "studio": "Pulse Circuit",
+    "publisher": "VORTEX Originals",
+    "release": "October 1, 2026",
+    "size": 12,
+    "rating": 4.5,
+    "reviews": 3200,
+    "players": "1",
+    "langs": "English, Russian",
+    "req": {"os": "Windows 10", "cpu": "Intel i3", "ram": "6 GB", "gpu": "GTX 1050", "disk": "12 GB"},
+    "price": {"off": "−20%", "old": "$14.90", "now": "$11.92", "value": 11.92}
+  },
+  "Ashen Ring": {
+    "img": "images/dark-souls.jpg",
+    "shots": ["images/shadow-of-the-colossus.jpg", "images/witcher-3.jpg", "images/dishonored.jpg"],
+    "genre": "Action RPG · Souls-like",
+    "tags": ["RPG", "Difficult", "Exploration", "Boss fights"],
+    "short": "A dark fantasy world where every death teaches you something new.",
+    "about": "Explore a decaying kingdom, learn enemy patterns and overcome punishing bosses. Build your character through careful leveling and equipment choices. No hand-holding, only fair challenge.",
+    "features": ["Punishing bosses", "Deep character builds", "Interconnected world", "Co-op summons"],
+    "studio": "Ember Forge",
+    "publisher": "VORTEX Originals",
+    "release": "August 15, 2026",
+    "size": 42,
+    "rating": 4.8,
+    "reviews": 18900,
+    "players": "1–3",
+    "langs": "English, Russian, 日本語",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-8400", "ram": "12 GB", "gpu": "GTX 1660", "disk": "42 GB SSD"},
+    "price": {"now": "$39.90", "value": 39.9}
+  },
+  "Cosmic Border": {
+    "img": "images/borderlands.jpg",
+    "shots": ["images/guardians-of-the-galaxy.jpg", "images/doom.jpg", "images/stalker-2.jpg"],
+    "genre": "Looter shooter · Co-op",
+    "tags": ["Shooter", "Loot", "Co-op", "Humor"],
+    "short": "Shoot, loot and laugh across a chaotic frontier planet.",
+    "about": "Four classes, endless guns and a story full of bad jokes. Drop in with friends, farm legendary gear and take down planetary bosses. Mayhem mode multiplies the chaos.",
+    "features": ["4 playable classes", "Millions of guns", "4-player co-op", "Mayhem difficulty"],
+    "studio": "Frontier Jokes",
+    "publisher": "VORTEX Originals",
+    "release": "July 8, 2026",
+    "size": 55,
+    "rating": 4.3,
+    "reviews": 22100,
+    "players": "1–4",
+    "langs": "English, Russian, Español",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-8400", "ram": "10 GB", "gpu": "GTX 1060", "disk": "55 GB"},
+    "price": {"off": "−40%", "old": "$49.90", "now": "$29.94", "value": 29.94}
+  },
+  "Crystal Odyssey": {
+    "img": "images/final-fantasy-xv.jpg",
+    "shots": ["images/witcher-3.jpg", "images/folklore.jpg", "images/guardians-of-the-galaxy.jpg"],
+    "genre": "JRPG · Open world",
+    "tags": ["RPG", "Story", "Open world", "Party"],
+    "short": "A road-trip across a kingdom of crystal and steel.",
+    "about": "Travel with a party of friends, camp under the stars, hunt massive beasts and uncover a royal conspiracy. Real-time combat mixed with strategic party commands.",
+    "features": ["Open-world exploration", "Party camping", "Epic story", "Photo mode"],
+    "studio": "Lumen Soft",
+    "publisher": "Small Print",
+    "release": "September 18, 2026",
+    "size": 78,
+    "rating": 4.6,
+    "reviews": 9400,
+    "players": "1",
+    "langs": "English, Russian, 日本語, Français",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i7-7700", "ram": "16 GB", "gpu": "RTX 2060", "disk": "78 GB SSD"},
+    "price": {"now": "$44.90", "value": 44.9}
+  },
+  "Galaxy Guardians": {
+    "img": "images/guardians-of-the-galaxy.jpg",
+    "shots": ["images/borderlands.jpg", "images/doom.jpg", "images/call-of-duty.jpg"],
+    "genre": "Action · Adventure",
+    "tags": ["Action", "Story", "Space", "Humor"],
+    "short": "Assemble a misfit crew and save the galaxy one quip at a time.",
+    "about": "Lead a team of unlikely heroes through story-driven missions. Switch characters mid-combat, use unique abilities and make dialogue choices that change relationships.",
+    "features": ["Character switching", "Branching dialogue", "Soundtrack radio", "Cinematic set pieces"],
+    "studio": "Starcrew",
+    "publisher": "VORTEX Originals",
+    "release": "June 2, 2026",
+    "size": 48,
+    "rating": 4.7,
+    "reviews": 11200,
+    "players": "1",
+    "langs": "English, Russian, Español",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-8400", "ram": "12 GB", "gpu": "GTX 1660", "disk": "48 GB"},
+    "price": {"off": "−25%", "old": "$39.90", "now": "$29.93", "value": 29.93}
+  },
+  "Cage Fury 6": {
+    "img": "images/ufc-6.jpg",
+    "shots": ["images/call-of-duty.jpg", "images/batman-arkham-knight.jpg", "images/gta-5.jpg"],
+    "genre": "Fighting · Sports",
+    "tags": ["Fighting", "Sports", "Multiplayer", "Simulation"],
+    "short": "Step into the octagon. One mistake ends the fight.",
+    "about": "Realistic MMA simulation with career mode, online ranked and local versus. Master striking, grappling and submissions. Create your own fighter and climb the rankings.",
+    "features": ["Career mode", "Online ranked", "Fighter creator", "Local multiplayer"],
+    "studio": "Octagon Soft",
+    "publisher": "VORTEX Originals",
+    "release": "May 20, 2026",
+    "size": 36,
+    "rating": 4.2,
+    "reviews": 7800,
+    "players": "1–2",
+    "langs": "English, Russian",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-7500", "ram": "8 GB", "gpu": "GTX 1060", "disk": "36 GB"},
+    "price": {"now": "$49.90", "value": 49.9}
+  },
+  "Echo Protocol": {
+    "img": "images/call-of-duty.jpg",
+    "shots": ["images/doom.jpg", "images/stalker-2.jpg", "images/resident-evil-3.jpg"],
+    "genre": "Tactical FPS · Multiplayer",
+    "tags": ["FPS", "Tactical", "Multiplayer", "Competitive"],
+    "short": "Five operators. One objective. No second chances.",
+    "about": "Round-based tactical shooter where information and timing decide the match. Attack or defend sites, use drones and gadgets, and coordinate with your squad. Ranked seasons with unique rewards.",
+    "features": ["5v5 ranked", "Operator gadgets", "Destructible cover", "Spectator mode"],
+    "studio": "Signal Ops",
+    "publisher": "VORTEX Originals",
+    "release": "April 12, 2026",
+    "size": 52,
+    "rating": 4.4,
+    "reviews": 15600,
+    "players": "1–10",
+    "langs": "English, Russian, 日本語",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-9400", "ram": "12 GB", "gpu": "GTX 1660", "disk": "52 GB SSD"},
+    "price": {"now": "$29.90", "value": 29.9}
+  }
 };
 
   function imageOf(title) {
@@ -1422,14 +1554,14 @@
       '    <div class="field"><label for="co-mail">Gmail</label>',
       '      <input id="co-mail" type="email" autocomplete="email" placeholder="name@gmail.com">',
       '      <span class="field__error" data-coerr="mail"></span></div>',
-      '    <div class="field"><label for="co-card">Demo card number</label>',
-      '      <input id="co-card" type="text" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="4242 4242 4242 4242">',
+      '    <div class="field"><label for="co-card">Card number</label>',
+      '      <input id="co-card" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="Any 13–19 digits">',
       '      <span class="field__error" data-coerr="card"></span></div>',
-      '    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label for="co-exp">Expiry (MM/YY)</label><input id="co-exp" maxlength="5" placeholder="12/30"><span class="field__error" data-coerr="exp"></span></div>',
-      '    <div class="field"><label for="co-cvv">Demo CVV</label><input id="co-cvv" inputmode="numeric" maxlength="3" placeholder="123"><span class="field__error" data-coerr="cvv"></span></div></div>',
+      '    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label for="co-exp">Expiry (MM/YY)</label><input id="co-exp" maxlength="5" placeholder="MM/YY"><span class="field__error" data-coerr="exp"></span></div>',
+      '    <div class="field"><label for="co-cvv">CVV</label><input id="co-cvv" inputmode="numeric" maxlength="4" placeholder="123"><span class="field__error" data-coerr="cvv"></span></div></div>',
       '    <button class="btn btn--primary btn--block" type="submit" id="co-submit">Pay and add to profile</button>', 
       '  </form>',
-      '  <p class="topup__note">DEMO ONLY: use test card 4242 4242 4242 4242, expiry 12/30, CVV 123. Never enter a real card. Card details are not saved or sent.</p>',
+      '  <p class="topup__note">Demo checkout: enter any card number (13–19 digits), any expiry MM/YY and any CVV. Nothing is sent to a real bank — data stays in this browser only.</p>',
       '</div>'
     ].join("");
     return box;
@@ -1483,9 +1615,11 @@
     var ok = true;
     if (!/^\+?\d{9,15}$/.test(digits)) { coError("phone", "Enter a valid phone number, 9–15 digits."); ok = false; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { coError("mail", "Enter a valid email address."); ok = false; }
-    if (card !== "4242424242424242") { coError("card", "Demo only: use 4242 4242 4242 4242."); ok = false; }
-    if (exp !== "12/30") { coError("exp", "Demo expiry is 12/30."); ok = false; }
-    if (cvv !== "123") { coError("cvv", "Demo CVV is 123."); ok = false; }
+    if (!/^\d{13,19}$/.test(card)) { coError("card", "Enter 13–19 digits (spaces allowed)."); ok = false; }
+    // Accept any MM/YY-style or pure digits for expiry (demo)
+    var expDigits = exp.replace(/\D/g, "");
+    if (expDigits.length < 3 || expDigits.length > 4) { coError("exp", "Enter expiry as digits, e.g. 09/28 or 0928."); ok = false; }
+    if (!/^\d{3,4}$/.test(cvv)) { coError("cvv", "Enter 3 or 4 digits."); ok = false; }
     if (!ok) return;
     var list = readCart();
     if (!list.length) { toast("Your cart is empty"); closeCheckout(); return; }
@@ -2365,6 +2499,10 @@
       { title: "Dust & Circuit", state: "Not installed", hours: 0, last: "never launched", done: 0 },
       { title: "Pale Mountain Saga", state: "Installed", hours: 203, last: "2 days ago", done: 88 },
       { title: "Underpass Kings", state: "Installed", hours: 40, last: "5 days ago", done: 27 },
+      { title: "Ashen Ring", state: "Installed", hours: 56, last: "today", done: 22 },
+      { title: "Cosmic Border", state: "Installed", hours: 91, last: "yesterday", done: 48 },
+      { title: "Echo Protocol", state: "Installed", hours: 33, last: "3 days ago", done: 15 },
+      { title: "Neon Drift Pro", state: "Installed", hours: 12, last: "today", done: 70 },
       { title: "Crimson Arena", state: "Updating", hours: 12, last: "a week ago", done: 18 },
       { title: "Zone Zero", state: "Not installed", hours: 6, last: "2 months ago", done: 5 }
     ];
@@ -2729,6 +2867,25 @@
     try { localStorage.setItem(HIST_KEY, JSON.stringify(list)); } catch (e) {}
   }
 
+  function recordPlay(title, score, durationSec) {
+    if (!title) return;
+    score = Math.max(0, Math.round(Number(score) || 0));
+    var secs = Math.max(0, Number(durationSec) || 0);
+    var list = readHistory();
+    list.unshift({ title: String(title), ts: Date.now(), score: score, dur: secs });
+    writeHistory(list.slice(0, 100));
+    try { document.dispatchEvent(new CustomEvent("vp:history")); } catch (e) {}
+    if (typeof toast === "function") toast("Saved to play history: " + title);
+  }
+
+  // Expose for other game engines (fpgames / refresh)
+  if (window.VP) {
+    window.VP.recordPlay = recordPlay;
+    window.VP.readHistory = readHistory;
+  } else {
+    window.VP = { recordPlay: recordPlay, readHistory: readHistory };
+  }
+
   function ago(ts) {
     var m = Math.floor((Date.now() - ts) / 60000);
     if (m < 1) return "just now";
@@ -2763,7 +2920,10 @@
     "Underpass Kings": "racing", "Last Bastion": "fps", "Night Warden": "whack",
     "Verdant Frontier": "snake", "Wasteland Courier": "fps", "Pale Mountain Saga": "runner",
     "Zone Zero": "shooter", "Crimson Arena": "whack", "Blade of Ember": "runner",
-    "Starfall Guardians": "shooter", "Veil of Lanterns": "breakout"
+    "Starfall Guardians": "shooter", "Veil of Lanterns": "breakout",
+    "Neon Drift Pro": "racing", "Ashen Ring": "runner", "Cosmic Border": "shooter",
+    "Crystal Odyssey": "memory", "Galaxy Guardians": "catch", "Cage Fury 6": "whack",
+    "Echo Protocol": "fps"
   };
   var KIND_NAME = {
     racing: "Car racing", shooter: "Space shooter", fps: "First-person tactical shooter", snake: "Snake",

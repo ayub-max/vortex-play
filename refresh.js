@@ -29,7 +29,7 @@ function makeArcade(title){
  wrap.querySelector("#vp-title").textContent=title;
  wrap.querySelector(".vp-mission").textContent=def.mission;wrap.querySelector(".vp-goal").textContent=def.goal;wrap.querySelector(".vp-help").textContent=def.help;
  msg.querySelector("p").textContent=def.name+" — "+def.goal+". Study the controls, then deploy.";
- game={title,kind,def,ctx,canvas,state:"brief",x:120,y:390,vx:0,vy:0,health:100,score:0,objective:0,time:0,enemies:[],items:[],shots:[],world:0,won:false};
+ game={title,kind,def,ctx,canvas,state:"brief",x:120,y:390,vx:0,vy:0,health:100,score:0,objective:0,time:0,enemies:[],items:[],shots:[],world:0,won:false,_t0:Date.now()};
  for(let i=0;i<7;i++)game.enemies.push({x:430+i*95,y:300+(i%3)*35,hp:1,alive:true,phase:i});
  for(let i=0;i<7;i++)game.items.push({x:250+i*85,y:330+(i%3)*30,got:false});
  wrap.querySelector(".vp-arcade__start").onclick=()=>{game.state="playing";msg.hidden=true;last=performance.now();raf=requestAnimationFrame(loop);};
@@ -73,7 +73,7 @@ function loop(now){if(!game||!overlay)return;let g=game,dt=Math.min(.04,(now-las
  else if(g.kind==="survival"){if(keys.KeyA||keys.ArrowLeft)g.x-=speed;if(keys.KeyD||keys.ArrowRight)g.x+=speed;if(keys.KeyW||keys.ArrowUp)g.y-=speed;if(keys.KeyS||keys.ArrowDown)g.y+=speed;g.x=Math.max(15,Math.min(885,g.x));g.y=Math.max(20,Math.min(500,g.y));g.items.forEach(it=>{if(!it.got&&Math.hypot(it.x-g.x,it.y-g.y)<25){it.got=true;g.objective++;g.score+=75;log("Supply crate secured +75");updateHud();checkWin()}});g.enemies.forEach(e=>{if(!e.alive)return;let dx=g.x-e.x,dy=g.y-e.y,d=Math.hypot(dx,dy)||1;e.x+=dx/d*30*dt;e.y+=dy/d*30*dt;if(d<22){g.health-=18*dt}});if(g.health<=0){g.health=0;g.state="over";const m=overlay.querySelector(".vp-arcade__message");m.hidden=false;m.querySelector("h3").textContent="YOU WERE OVERRUN";m.querySelector("p").textContent="Supplies found: "+g.objective+" · Try another route.";m.querySelector("button").textContent="RETRY";m.querySelector("button").onclick=()=>makeArcade(g.title)}}
  else {if(keys.KeyA||keys.ArrowLeft)g.x-=speed;if(keys.KeyD||keys.ArrowRight){g.x+=speed;g.world+=speed}if((keys.Space||keys.KeyW||keys.ArrowUp)&&g.y>=400)g.vy=-390;g.vy+=850*dt;g.y+=g.vy*dt;if(g.y>400) {g.y=400;g.vy=0}if(g.x>820||g.world>700){g.state="over";checkWin()}}
  updateHud();draw();if(g.state==="playing")raf=requestAnimationFrame(loop);else draw();}else{draw();raf=requestAnimationFrame(loop)}}
-function closeArcade(){if(raf)cancelAnimationFrame(raf);raf=0;if(overlay)overlay.remove();overlay=null;game=null;keys={};mouse.down=false}
+function closeArcade(){if(raf)cancelAnimationFrame(raf);raf=0;if(game&&window.VP&&window.VP.recordPlay){const sc=game.score||0;const dur=Math.max(1,(Date.now()-(game._t0||Date.now()))/1000);window.VP.recordPlay(game.title,sc,dur)}if(overlay)overlay.remove();overlay=null;game=null;keys={};mouse.down=false}
 document.addEventListener("keydown",e=>{keys[e.code]=true;if(overlay&&["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();if(e.code==="Escape"&&overlay)closeArcade();if(e.code==="Space"&&game&&game.kind==="fps")shoot()});
 document.addEventListener("keyup",e=>{keys[e.code]=false});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-play],[data-again]");if(!b)return;const title=b.dataset.play||b.dataset.again;if(!title)return;e.preventDefault();e.stopImmediatePropagation();if(window.VPFP)VPFP.launch(title);else makeArcade(title)},true);

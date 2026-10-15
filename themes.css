@@ -280,3 +280,155 @@ html[data-theme="flowers"] .drawer__card { background: #fff7fb; }
 @media (prefers-reduced-motion: reduce) {
   html[data-theme="magic"] body::before { animation: none; }
 }
+
+/* ---------- доп. бесплатные цвета ---------- */
+html[data-theme="navy"] {
+  --void: #0a1628;
+  --panel: rgba(12, 28, 52, .88);
+  --panel-2: #132844;
+  --line: #243a5c;
+  --text: #e8f0ff;
+  --muted: #8aa0c0;
+}
+html[data-theme="navy"] body {
+  background-color: #0a1628;
+  background-image:
+    radial-gradient(900px 500px at 90% 0%, rgba(40, 100, 200, .25), transparent 60%),
+    linear-gradient(180deg, #061018, #0a1628);
+}
+
+html[data-theme="forest"] {
+  --void: #0a1a12;
+  --panel: rgba(12, 36, 24, .88);
+  --panel-2: #143028;
+  --line: #2a4a3a;
+  --text: #e8fff4;
+  --muted: #8ab8a0;
+}
+html[data-theme="forest"] body {
+  background-color: #0a1a12;
+  background-image:
+    radial-gradient(900px 500px at 10% 100%, rgba(40, 160, 100, .2), transparent 60%),
+    linear-gradient(180deg, #06140e, #0a1a12);
+}
+
+html[data-theme="rose"] {
+  --void: #1a0c14;
+  --panel: rgba(40, 16, 28, .88);
+  --panel-2: #2a1420;
+  --line: #4a2840;
+  --text: #ffeef6;
+  --muted: #c090a8;
+}
+html[data-theme="rose"] body {
+  background-color: #1a0c14;
+  background-image:
+    radial-gradient(900px 500px at 80% 20%, rgba(200, 60, 120, .22), transparent 60%),
+    linear-gradient(180deg, #140810, #1a0c14);
+}
+
+html[data-theme="custom"] {
+  --void: var(--custom-bg, #1a1035);
+  --panel: color-mix(in srgb, var(--custom-bg, #1a1035) 85%, #000);
+  --panel-2: color-mix(in srgb, var(--custom-bg, #1a1035) 70%, #111);
+}
+html[data-theme="custom"] body {
+  background-color: var(--custom-bg, #1a1035);
+  background-image: none;
+}
+
+/* swatches for new free themes */
+.theme-opt[data-t="navy"] .theme-opt__sw { background: linear-gradient(135deg, #0a1628, #1a4a8a); }
+.theme-opt[data-t="forest"] .theme-opt__sw { background: linear-gradient(135deg, #0a1a12, #1a8a50); }
+.theme-opt[data-t="rose"] .theme-opt__sw { background: linear-gradient(135deg, #1a0c14, #a03060); }
+.theme-opt[data-t="custom"] .theme-opt__sw {
+  background: conic-gradient(from 0deg, #f66, #fc6, #6f6, #6cf, #66f, #f6f, #f66);
+}
+
+/* paid UI */
+.theme-switch__panel {
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+}
+.theme-switch__sub {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.theme-switch__group {
+  margin: 12px 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.theme-switch__hint {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.theme-opt {
+  position: relative;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+.theme-opt__sw {
+  width: 36px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+.theme-opt__label { flex: 1; font-size: 12.5px; }
+.theme-opt__badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(79, 224, 176, .15);
+  color: var(--mint, #4fe0b0);
+}
+.theme-opt--paid .theme-opt__badge {
+  background: rgba(255, 194, 71, .18);
+  color: var(--amber, #ffc247);
+}
+.theme-opt.is-owned .theme-opt__badge {
+  background: rgba(123, 92, 255, .2);
+  color: #b9a8ff;
+}
+.theme-opt.is-locked .theme-opt__lock {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 11px;
+  opacity: .85;
+}
+.theme-opt.is-owned .theme-opt__lock { display: none; }
+.theme-opt:not(.is-locked) .theme-opt__lock { display: none; }
+
+.theme-picker-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 4px;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  font-size: 12px;
+}
+.theme-picker-row input[type="color"] {
+  width: 40px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}

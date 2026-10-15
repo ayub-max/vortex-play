@@ -1949,3 +1949,87 @@ button.session__wallet span { color: var(--amber); margin-left: 2px; }
 /* Library mini-games: keep all playable experiences embedded in the game overlay */
 .arcade__stage { cursor: crosshair; touch-action: none; }
 .arcade__stage canvas { display: block; width: 100%; height: auto; max-height: 70vh; object-fit: contain; }
+
+/* ===== Extra features UI ===== */
+.feat-bar { margin-top: 8px; margin-bottom: 28px; }
+.feat-bar__row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.feat-input, .feat-tools select {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  color: inherit;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font: inherit;
+  min-width: 180px;
+  flex: 1;
+}
+.feat-input:focus, .feat-tools select:focus { outline: 2px solid var(--accent, #7b5cff); outline-offset: 1px; }
+.feat-countdown {
+  display: inline-flex; gap: 8px; align-items: center;
+  padding: 8px 14px; border-radius: 999px;
+  background: linear-gradient(90deg, rgba(123,92,255,.2), rgba(79,224,176,.15));
+  font-size: .9rem;
+}
+.feat-countdown b { font-family: "Chakra Petch", sans-serif; letter-spacing: .02em; }
+.feat-recent { margin-top: 16px; }
+.feat-recent h3 { font-size: .95rem; margin: 0 0 8px; opacity: .8; }
+.feat-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.feat-chip {
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  color: inherit;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+  font-size: .85rem;
+}
+.feat-chip:hover { border-color: var(--accent, #7b5cff); }
+.feat-pulse { animation: featPulse .9s ease; box-shadow: 0 0 0 3px var(--accent, #7b5cff); }
+@keyframes featPulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+.feat-tools {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  margin-top: 12px;
+}
+.feat-tools--lib { margin-top: 10px; }
+.feat-label { display: flex; align-items: center; gap: 8px; font-size: .9rem; opacity: .9; }
+.feat-goal {
+  margin-top: 10px; width: 100%;
+  font-size: .85rem;
+}
+.feat-goal__track {
+  height: 6px; border-radius: 99px; background: rgba(255,255,255,.08); margin-top: 6px; overflow: hidden;
+}
+.feat-goal__track i {
+  display: block; height: 100%; background: var(--accent, #7b5cff); border-radius: 99px;
+}
+.feat-bm-btn { margin-top: 8px; }
+.feat-text-lg .feed, .feat-text-lg .rail { font-size: 1.08rem; }
+.feat-text-xl .feed, .feat-text-xl .rail { font-size: 1.18rem; }
+.feat-quests { margin: 20px 0; }
+.feat-quest-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.feat-quest {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.feat-quest.is-done { opacity: .65; }
+.feat-quest em { opacity: .7; font-style: normal; font-size: .85em; margin-left: 6px; }
+.feat-challenge {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding: 16px; border-radius: 14px;
+  background: rgba(123,92,255,.1); border: 1px solid rgba(123,92,255,.25);
+}
+.feat-challenge p { margin: 0; flex: 1; min-width: 200px; }
+.feat-trivia { margin-top: 16px; display: grid; gap: 10px; }
+.feat-trivia__q { font-weight: 600; margin: 0 0 4px; }
+.feat-trivia__opt { justify-self: start; }
+.feat-mini { min-height: auto; }
+@media (max-width: 640px) {
+  .feat-bar__row { flex-direction: column; align-items: stretch; }
+  .feat-input { min-width: 0; width: 100%; }
+}
