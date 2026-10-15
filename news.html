@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="VORTEX//PLAY news: patches, releases and festivals.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VORTEX//PLAY — news</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="refresh.css">
+</head>
+<body data-page="news">
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="logo" href="index.html">VORTEX<span>//</span>PLAY</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="news.html" aria-current="page">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <div class="session" data-session></div>
+    <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span class="burger__lines"></span></button>
+  </div>
+</header>
+
+<main class="shell">
+
+  <div class="page-head">
+    <h1>Platform news</h1>
+    <p>Patches, releases and festivals — updated every day.</p>
+  </div>
+
+  <div class="filters" id="filters" role="group" aria-label="Filter by topic"></div>
+
+  <div class="news-layout">
+    <div>
+      <div class="feed" id="feed"></div>
+      <p class="feed__empty" id="feed-empty" hidden>Nothing here yet. Pick “All” or check back tomorrow.</p>
+    </div>
+
+    <aside class="rail">
+      <section class="rail__box">
+        <h2>Upcoming dates</h2>
+        <ol class="dates" id="dates"></ol>
+      </section>
+      <section class="rail__box">
+        <h2>Digest subscription</h2>
+        <p class="rail__text">One email a week: only releases from your wishlist.</p>
+        <form class="rail__form" id="digest">
+          <label class="visually-hidden" for="digest-mail">Email</label>
+          <input id="digest-mail" type="email" placeholder="you@mail.com" required>
+          <button class="btn btn--primary btn--block" type="submit">Subscribe</button>
+          <span class="rail__status" id="digest-status" role="status"></span>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  <section class="section" id="poll" aria-labelledby="poll-title">
+    <div class="section__head"><h2 id="poll-title">Community poll</h2><span class="section__note">What should we add to the catalog next?</span></div>
+    <div class="poll">
+      <div class="poll__options" id="poll-options"></div>
+      <p class="poll__note" id="poll-note" role="status"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__top">
+    <div class="footer__brand">
+      <p class="logo">VORTEX<span>//</span>PLAY</p>
+      <p class="footer__about">A game store with fair prices, a living library and a profile that remembers every achievement.</p>
+      <div class="footer__social" aria-label="Social media">
+        <a href="#" aria-label="Telegram">✈</a>
+        <a href="#" aria-label="Discord">◈</a>
+        <a href="#" aria-label="VK">VK</a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Site sections">
+      <h3>Platform</h3>
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <nav class="footer__col" aria-label="Support">
+      <h3>Support</h3>
+      <a href="#">Platform rules</a>
+      <a href="#">Help &amp; requests</a>
+      <a href="#">Refunds</a>
+      <a href="#">For developers</a>
+    </nav>
+    <nav class="footer__col" aria-label="Company">
+      <h3>Company</h3>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Contacts</a>
+    </nav>
+  </div>
+  <div class="shell footer__bottom">
+    <span>© 2026 VORTEX//PLAY</span>
+    <span>Demo platform · made with love for games</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="fpgames.js"></script>
+<script src="refresh.js"></script>
+</body>
+</html>

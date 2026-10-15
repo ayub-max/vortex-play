@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="VORTEX//PLAY — game store: weekly deals, sales chart and fresh releases. Click a cover to open the game page.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VORTEX//PLAY — store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="refresh.css">
+</head>
+<body data-page="home">
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="logo" href="index.html">VORTEX<span>//</span>PLAY</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <div class="session" data-session></div>
+    <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span class="burger__lines"></span></button>
+  </div>
+</header>
+
+<main class="shell">
+
+  <section class="hero" aria-label="Game of the week">
+    <div class="hero__stage">
+      <div class="cover hero__cover" id="hero-cover">
+        <span class="cover__title" id="hero-cover-title"></span>
+        <span class="cover__hint">Details</span>
+      </div>
+      <ol class="hero__picker" id="hero-picker" aria-label="Other picks"></ol>
+    </div>
+
+    <div class="hero__info">
+      <p class="hero__kicker" id="hero-kicker"></p>
+      <h1 id="hero-title">Neon Drifter</h1>
+      <p class="hero__text" id="hero-text"></p>
+      <ul class="tags" id="hero-tags"></ul>
+      <div class="hero__buy">
+        <div class="price">
+          <span class="price__off" id="hero-off"></span>
+          <span class="price__old" id="hero-old"></span>
+          <span class="price__now" id="hero-now"></span>
+        </div>
+        <button class="btn btn--primary" type="button" id="hero-buy" data-buy="">Add to cart</button>
+        <button class="btn btn--ghost" type="button" data-wish>Add to wishlist</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Weekly deals</h2><a href="#">All offers</a></div>
+    <div class="grid" id="deals"></div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Trending now</h2><a href="#">Full chart</a></div>
+    <ol class="chart" id="chart"></ol>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Fresh releases</h2><a href="news.html">Read the news</a></div>
+    <div class="grid" id="fresh"></div>
+  </section>
+
+  <section class="section" id="soon-section" aria-label="Coming soon">
+    <div class="section__head"><h2>Coming soon</h2><a href="news.html">Release dates</a></div>
+    <div class="soon" id="soon"></div>
+  </section>
+
+  <section class="section about-site" aria-label="About the platform">
+    <div class="about-site__card">
+      <div class="about-site__text-block">
+        <p class="hero__kicker">About</p>
+        <h2>What is VORTEX//PLAY</h2>
+        <p class="about-site__text">VORTEX//PLAY is a digital game storefront: weekly deals, a sales chart and fresh releases on one page. Every game has a page with a description, specs, screenshots and reviews, opened by clicking its cover. Purchased games go to your personal library, where you can launch them, see hours played, achievement progress and disk space. Every session is saved on the History page.</p>
+      </div>
+      <ul class="about-site__stats">
+        <li><b>22</b><span>games in the catalog</span></li>
+        <li><b>5</b><span>sections: store, news, library, history, profile</span></li>
+        <li><b>24/7</b><span>access to your account and cart</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__top">
+    <div class="footer__brand">
+      <p class="logo">VORTEX<span>//</span>PLAY</p>
+      <p class="footer__about">A game store with fair prices, a living library and a profile that remembers every achievement.</p>
+      <div class="footer__social" aria-label="Social media">
+        <a href="#" aria-label="Telegram">✈</a>
+        <a href="#" aria-label="Discord">◈</a>
+        <a href="#" aria-label="VK">VK</a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Site sections">
+      <h3>Platform</h3>
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <nav class="footer__col" aria-label="Support">
+      <h3>Support</h3>
+      <a href="#">Platform rules</a>
+      <a href="#">Help &amp; requests</a>
+      <a href="#">Refunds</a>
+      <a href="#">For developers</a>
+    </nav>
+    <nav class="footer__col" aria-label="Company">
+      <h3>Company</h3>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Contacts</a>
+    </nav>
+  </div>
+  <div class="shell footer__bottom">
+    <span>© 2026 VORTEX//PLAY</span>
+    <span>Demo platform · made with love for games</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="fpgames.js"></script>
+<script src="refresh.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="VORTEX//PLAY profile: level, achievements, activity and friends.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VORTEX//PLAY — profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="refresh.css">
+</head>
+<body data-page="profile">
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="logo" href="index.html">VORTEX<span>//</span>PLAY</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html" aria-current="page">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <div class="session" data-session></div>
+    <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span class="burger__lines"></span></button>
+  </div>
+</header>
+
+<main class="shell">
+
+  <section class="card-me">
+    <div class="card-me__avatar" id="me-avatar">V</div>
+    <div class="card-me__info">
+      <h1 id="me-nick">Player</h1>
+      <p class="card-me__mail" id="me-mail">—</p>
+      <p class="card-me__mail" id="me-phone"></p>
+      <p class="card-me__status" id="me-status">Last played: —</p>
+      <div class="level">
+        <span class="level__badge" id="me-level">24</span>
+        <div class="level__bar">
+          <div class="level__track"><span id="me-xp"></span></div>
+          <p>1,340 / 2,000 XP to level 25</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-me__actions">
+      <button class="btn btn--ghost" type="button" id="edit-status">Edit status</button>
+      <button class="btn btn--ghost" type="button" data-logout>Log out</button>
+    </div>
+  </section>
+
+  <section class="stats" id="stats" aria-label="Statistics"></section>
+
+  <section class="section" id="owned-section" aria-labelledby="owned-title">
+    <div class="section__head"><h2 id="owned-title">My purchased games</h2><span class="section__note" id="owned-count"></span></div>
+    <div class="grid" id="owned"></div>
+  </section>
+
+  <div class="profile-layout">
+    <div>
+      <section class="section">
+        <div class="section__head"><h2>Recent activity</h2><a href="library.html">Go to library</a></div>
+        <ul class="activity" id="activity"></ul>
+      </section>
+
+      <section class="section">
+        <div class="section__head"><h2>Achievement showcase</h2><a href="#">All 214</a></div>
+        <div class="awards" id="awards"></div>
+      </section>
+
+      <section class="section" id="week-section" aria-labelledby="week-title">
+        <div class="section__head"><h2 id="week-title">Playtime this week</h2><span class="section__note" id="week-total"></span></div>
+        <div class="week" id="week" role="img" aria-label="Hours played per day over the last seven days"></div>
+      </section>
+    </div>
+
+    <aside class="side">
+      <section class="side__box">
+        <h2>Friends <span id="friends-online"></span></h2>
+        <ul class="friends" id="friends"></ul>
+      </section>
+      <section class="side__box">
+        <h2>Wallet</h2>
+        <p class="wallet" id="wallet">—</p>
+        <button class="btn btn--primary btn--block" type="button" data-topup>Top up</button>
+      </section>
+    </aside>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__top">
+    <div class="footer__brand">
+      <p class="logo">VORTEX<span>//</span>PLAY</p>
+      <p class="footer__about">A game store with fair prices, a living library and a profile that remembers every achievement.</p>
+      <div class="footer__social" aria-label="Social media">
+        <a href="#" aria-label="Telegram">✈</a>
+        <a href="#" aria-label="Discord">◈</a>
+        <a href="#" aria-label="VK">VK</a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Site sections">
+      <h3>Platform</h3>
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <nav class="footer__col" aria-label="Support">
+      <h3>Support</h3>
+      <a href="#">Platform rules</a>
+      <a href="#">Help &amp; requests</a>
+      <a href="#">Refunds</a>
+      <a href="#">For developers</a>
+    </nav>
+    <nav class="footer__col" aria-label="Company">
+      <h3>Company</h3>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Contacts</a>
+    </nav>
+  </div>
+  <div class="shell footer__bottom">
+    <span>© 2026 VORTEX//PLAY</span>
+    <span>Demo platform · made with love for games</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="fpgames.js"></script>
+<script src="refresh.js"></script>
+</body>
+</html>

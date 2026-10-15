@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="VORTEX//PLAY explore: genres, rankings, plans, roadmap and community in one page.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VORTEX//PLAY — explore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="refresh.css">
+<link rel="stylesheet" href="explore.css">
+</head>
+<body data-page="explore">
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="logo" href="index.html">VORTEX<span>//</span>PLAY</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html" aria-current="page">Explore</a>
+    </nav>
+    <div class="session" data-session></div>
+    <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span class="burger__lines"></span></button>
+  </div>
+</header>
+
+<main class="shell x">
+
+<!-- 1 hero -->
+<section class="x-hero"><div><p class="hero__kicker">Explore</p><h1>Everything about play, <em>one page</em></h1><p>Genres, charts, plans, roadmap and community — a tour of the whole platform.</p><a class="btn btn--primary" href="#x-finder">Start exploring</a> <button class="btn btn--ghost" type="button" id="x-surprise">🎲 Surprise me</button></div><div class="x-hero__chips"><span>22 games</span><span>5 pages</span><span>24/7</span></div></section>
+
+<!-- 2 ticker -->
+<section class="x-ticker" aria-label="Genres"><div class="x-ticker__track" id="x-ticker"></div></section>
+
+<!-- 3 finder -->
+<section class="section" id="x-finder"><div class="section__head"><h2>Game finder</h2><span class="section__note" id="x-count"></span></div><div class="x-find"><input id="x-q" type="search" placeholder="Search by title, genre or studio" aria-label="Search games"><select id="x-sort" aria-label="Sort"><option value="rating">Top rated</option><option value="cheap">Cheapest first</option><option value="deal">Biggest discount</option><option value="name">A–Z</option></select></div><div class="filters" id="x-tags" role="group" aria-label="Filter by tag"></div><div class="grid" id="x-grid"></div><p class="feed__empty" id="x-empty" hidden>No games match. Clear the search or pick “All”.</p></section>
+<!-- 4 spotlight -->
+<section class="section"><div class="section__head"><h2>Spotlight</h2><button class="btn btn--ghost btn--small" type="button" id="x-next">Next pick →</button></div><article class="x-spot" id="x-spot"></article></section>
+<!-- 5 carousel -->
+<section class="section"><div class="section__head"><h2>Swipe through</h2><span><button class="btn btn--ghost btn--small" type="button" data-rail="-1" aria-label="Scroll left">←</button> <button class="btn btn--ghost btn--small" type="button" data-rail="1" aria-label="Scroll right">→</button></span></div><div class="x-rail" id="x-rail"></div></section>
+<!-- 6 timeline -->
+<section class="section"><div class="section__head"><h2>Platform timeline</h2></div><ol class="x-time"><li><b>2023</b><span>First 10 games added to the catalog</span></li><li><b>2024</b><span>Personal library and play history</span></li><li><b>2025</b><span>Achievements, friends and wallet</span></li><li><b>2026</b><span>Community polls and the Explore hub</span></li></ol></section>
+
+<!-- 7 leaderboard -->
+<section class="section"><div class="section__head"><h2>Leaderboard</h2><span class="section__note">Top players this week</span></div><table class="x-table"><thead><tr><th>#</th><th>Player</th><th><button type="button" data-sort="2">Hours ↕</button></th><th><button type="button" data-sort="3">Score ↕</button></th></tr></thead><tbody id="x-lb"><tr><td>1</td><td>NovaKite</td><td>38</td><td>98,400</td></tr><tr><td>2</td><td>Darkwave</td><td>34</td><td>91,250</td></tr><tr><td>3</td><td>PixelFox</td><td>29</td><td>87,010</td></tr><tr><td>4</td><td>Rustam_X</td><td>27</td><td>80,775</td></tr></tbody></table></section>
+
+<!-- 8 quotes -->
+<section class="section"><div class="section__head"><h2>Players say</h2></div><div class="x-quotes"><blockquote>“Fair prices and a library that actually feels alive.”<cite>— Aziza</cite></blockquote><blockquote>“The history page is my favorite — every session is saved.”<cite>— Jasur</cite></blockquote><blockquote>“Weekly deals saved me a fortune.”<cite>— Mila</cite></blockquote></div></section>
+
+<!-- 9 rings -->
+<section class="section"><div class="section__head"><h2>By the numbers</h2></div><div class="x-rings"><div data-ring="sale"><b>0%</b><span>Games on sale</span></div><div data-ring="rate"><b>0%</b><span>Average rating</span></div><div data-ring="cart"><b>0%</b><span>Your cart vs catalog</span></div></div></section>
+
+<!-- 10 plans -->
+<section class="section"><div class="section__head"><h2>Plans</h2></div><div class="x-plans" id="x-plans"></div><p class="section__note" id="x-plan-note" role="status"></p></section>
+
+<!-- 11 steps -->
+<section class="section"><div class="section__head"><h2>How it works</h2></div><ol class="x-steps"><li>Find a game</li><li>Add to cart</li><li>Install</li><li>Play &amp; earn</li></ol></section>
+
+<!-- 12 faq -->
+<section class="section"><div class="section__head"><h2>FAQ</h2></div><input class="x-faqq" id="x-faqq" type="search" placeholder="Search questions" aria-label="Search questions"><div class="x-faq" id="x-faq"><details><summary>Can I get a refund?</summary><p>Yes, within 14 days if you played less than 2 hours.</p></details><details><summary>Where are my games stored?</summary><p>In your Library, with disk space shown on the left.</p></details><details><summary>Is my progress saved?</summary><p>Every session is saved on the History page.</p></details></div></section>
+
+<!-- 13 compare -->
+<section class="section"><div class="section__head"><h2>Compare plans</h2></div><div class="x-cmp" id="x-cmp"><div></div><b>Free</b><b>Plus</b><span>Cloud saves</span><i>—</i><i>✓</i><span>Early access</span><i>—</i><i>✓</i><span>Library</span><i>✓</i><i>✓</i></div></section>
+
+<!-- 14 badges -->
+<section class="section"><div class="section__head"><h2>Badge wall</h2></div><div class="x-badges" id="x-badges"></div></section>
+
+<!-- 15 picks -->
+<section class="section"><div class="section__head"><h2>Editors’ picks</h2></div><div class="x-zig" id="x-zig"></div></section>
+<!-- 16 mosaic -->
+<section class="section"><div class="section__head"><h2>Screenshot mosaic</h2><span class="section__note">Click a screenshot to open the game</span></div><div class="x-mosaic" id="x-mosaic"></div></section>
+<!-- 17 tip -->
+<section class="section"><aside class="x-tip"><b>💡 Tip of the day</b><p id="x-tip"></p><button class="btn btn--ghost btn--small" type="button" id="x-tip-next">Another tip</button></aside></section>
+
+<!-- 18 roadmap -->
+<section class="section"><div class="section__head"><h2>Roadmap</h2></div><div class="x-road" id="x-road"></div></section>
+
+<!-- 19 team -->
+<section class="section"><div class="section__head"><h2>The team</h2></div><ul class="x-team"><li><i>A</i>Alex<span>Design</span></li><li><i>S</i>Sardor<span>Code</span></li><li><i>M</i>Mira<span>Support</span></li><li><i>D</i>Dina<span>Content</span></li></ul></section>
+
+<!-- 20 contact -->
+<section class="section"><div class="section__head"><h2>Contact us</h2></div><form class="x-form" id="x-form"><input type="text" placeholder="Name" required><input type="email" placeholder="you@mail.com" required><textarea rows="3" placeholder="Message" required></textarea><button class="btn btn--primary" type="submit">Send</button><span id="x-status" role="status"></span></form></section>
+
+<!-- 21 cta -->
+<section class="x-cta"><h2>Ready to play?</h2><p>Your library is waiting.</p><div><a class="btn btn--primary" href="index.html">Open the store</a><a class="btn btn--ghost" href="library.html">My library</a></div></section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__top">
+    <div class="footer__brand">
+      <p class="logo">VORTEX<span>//</span>PLAY</p>
+      <p class="footer__about">A game store with fair prices, a living library and a profile that remembers every achievement.</p>
+      <div class="footer__social" aria-label="Social media">
+        <a href="#" aria-label="Telegram">✈</a>
+        <a href="#" aria-label="Discord">◈</a>
+        <a href="#" aria-label="VK">VK</a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Site sections">
+      <h3>Platform</h3>
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="library.html">Library</a>
+      <a href="history.html">History</a>
+      <a href="profile.html">Profile</a>
+      <a href="explore.html">Explore</a>
+    </nav>
+    <nav class="footer__col" aria-label="Support">
+      <h3>Support</h3>
+      <a href="#">Platform rules</a>
+      <a href="#">Help &amp; requests</a>
+      <a href="#">Refunds</a>
+      <a href="#">For developers</a>
+    </nav>
+    <nav class="footer__col" aria-label="Company">
+      <h3>Company</h3>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Contacts</a>
+    </nav>
+  </div>
+  <div class="shell footer__bottom">
+    <span>© 2026 VORTEX//PLAY</span>
+    <span>Demo platform · made with love for games</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="fpgames.js"></script>
+<script src="refresh.js"></script>
+
+</body>
+</html>
