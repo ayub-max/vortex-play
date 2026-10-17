@@ -792,15 +792,632 @@
     }
   }
 
+
+  /* ---------- GLOBAL: shared helpers ---------- */
+  function gamesMap() {
+    if (window.GAMES && typeof window.GAMES === "object") return window.GAMES;
+    if (window.VP && window.VP.games) return window.VP.games;
+    return {};
+  }
+
+  function gameTitles() {
+    return Object.keys(gamesMap());
+  }
+
+  function getGame(title) {
+    var g = gamesMap()[title];
+    return g || null;
+  }
+
+  /* ---------- GLOBAL: dark mode ---------- */
+  function featTheme() {
+    var KEY = "theme";
+    var cur = STORE.get(KEY, "dark");
+    if (cur === "light") document.documentElement.classList.add("feat-light");
+    else document.documentElement.classList.remove("feat-light");
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "feat-fab feat-fab--theme";
+    btn.title = "Toggle theme (T)";
+    btn.setAttribute("aria-label", "Toggle light/dark theme");
+    btn.innerHTML = cur === "light" ? "☀️" : "🌙";
+    document.body.appendChild(btn);
+
+    function toggle() {
+      var now = STORE.get(KEY, "dark") === "light" ? "dark" : "light";
+      STORE.set(KEY, now);
+      document.documentElement.classList.toggle("feat-light", now === "light");
+      btn.innerHTML = now === "light" ? "☀️" : "🌙";
+      toast(now === "light" ? "Light theme" : "Dark theme");
+    }
+    btn.addEventListener("click", toggle);
+    window.__featToggleTheme = toggle;
+  }
+
+  /* ---------- GLOBAL: keyboard shortcuts ---------- */
+  function featShortcuts() {
+    var help = document.createElement("div");
+    help.id = "feat-hotkeys";
+    help.className = "feat-hotkeys";
+    help.hidden = true;
+    help.innerHTML =
+      '<div class="feat-hotkeys__card">' +
+      "<h3>Keyboard shortcuts</h3>" +
+      "<ul>" +
+      "<li><kbd>/</kbd> Focus search</li>" +
+      "<li><kbd>?</kbd> Show this help</li>" +
+      "<li><kbd>T</kbd> Toggle theme</li>" +
+      "<li><kbd>C</kbd> Open cart</li>" +
+      "<li><kbd>W</kbd> Open wishlist</li>" +
+      "<li><kbd>G</kbd> Game of the day</li>" +
+      "<li><kbd>Esc</kbd> Close overlays</li>" +
+      "</ul>" +
+      '<button type="button" class="btn btn--ghost btn--small" data-close-hotkeys>Close</button>' +
+      "</div>";
+    document.body.appendChild(help);
+
+    help.addEventListener("click", function (e) {
+      if (e.target.closest("[data-close-hotkeys]") || e.target === help) help.hidden = true;
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.target.matches("input, textarea, select") && e.key !== "Escape") return;
+      if (e.key === "?" || (e.shiftKey && e.key === "/")) {
+        e.preventDefault();
+        help.hidden = !help.hidden;
+      } else if (e.key === "Escape") {
+        help.hidden = true;
+        var cmp = document.getElementById("feat-compare-modal");
+        if (cmp) cmp.hidden = true;
+      } else if (e.key === "/" && !e.ctrlKey && !e.metaKey) {
+        var q = document.getElementById("feat-home-q") || document.getElementById("feat-news-q") || document.querySelector('input[type="search"]');
+        if (q) {
+          e.preventDefault();
+          q.focus();
+        }
+      } else if (e.key === "t" || e.key === "T") {
+        if (window.__featToggleTheme) window.__featToggleTheme();
+      } else if (e.key === "c" || e.key === "C") {
+        var cart = document.querySelector("[data-cart-open]");
+        if (cart) cart.click();
+      } else if (e.key === "w" || e.key === "W") {
+        var wish = document.getElementById("feat-wishlist-open");
+        if (wish) wish.click();
+      } else if (e.key === "g" || e.key === "G") {
+        if (window.__featGameOfDay) window.__featGameOfDay();
+      }
+    });
+  }
+
+  /* ---------- GLOBAL: daily streak ---------- */
+  function featStreak() {
+    var today = new Date().toISOString().slice(0, 10);
+    var data = STORE.get("streak", { last: null, count: 0, best: 0 });
+    if (data.last === today) return data.count;
+    var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    if (data.last === yesterday) data.count += 1;
+    else data.count = 1;
+    if (data.count > data.best) data.best = data.count;
+    data.last = today;
+    STORE.set("streak", data);
+    if (data.count > 1) {
+      setTimeout(function () {
+        toast("🔥 Login streak: " + data.count + " days (best " + data.best + ")");
+      }, 800);
+    }
+    return data.count;
+  }
+
+  /* ---------- GLOBAL: compare tray ---------- */
+  function featCompare() {
+    var tray = document.createElement("div");
+    tray.id = "feat-compare-tray";
+    tray.className = "feat-compare-tray";
+    tray.hidden = true;
+    tray.innerHTML =
+      '<div class="feat-compare-tray__inner">' +
+      '<span class="feat-compare-tray__label">Compare (<span id="feat-cmp-n">0</span>/3)</span>' +
+      '<div class="feat-compare-tray__list" id="feat-cmp-list"></div>' +
+      '<button type="button" class="btn btn--primary btn--small" id="feat-cmp-go">Compare</button>' +
+      '<button type="button" class="btn btn--ghost btn--small" id="feat-cmp-clear">Clear</button>' +
+      "</div>";
+    document.body.appendChild(tray);
+
+    var modal = document.createElement("div");
+    modal.id = "feat-compare-modal";
+    modal.className = "feat-modal";
+    modal.hidden = true;
+    modal.innerHTML = '<div class="feat-modal__card feat-modal__card--wide" id="feat-cmp-body"></div>';
+    document.body.appendChild(modal);
+
+    function list() {
+      return STORE.get("compare", []);
+    }
+    function paint() {
+      var L = list();
+      tray.hidden = L.length === 0;
+      var n = document.getElementById("feat-cmp-n");
+      if (n) n.textContent = String(L.length);
+      var box = document.getElementById("feat-cmp-list");
+      if (box)
+        box.innerHTML = L.map(function (t) {
+          return '<span class="feat-chip">' + esc(t) + ' <button type="button" data-cmp-rm="' + esc(t) + '" aria-label="Remove">×</button></span>';
+        }).join("");
+    }
+    paint();
+
+    window.__featAddCompare = function (title) {
+      if (!title) return;
+      var L = list();
+      if (L.indexOf(title) >= 0) {
+        toast("Already in compare");
+        return;
+      }
+      if (L.length >= 3) {
+        toast("Compare is full (max 3)");
+        return;
+      }
+      L.push(title);
+      STORE.set("compare", L);
+      paint();
+      toast("Added to compare: " + title);
+    };
+
+    document.addEventListener("click", function (e) {
+      var rm = e.target.closest("[data-cmp-rm]");
+      if (rm) {
+        var L = list().filter(function (x) {
+          return x !== rm.dataset.cmpRm;
+        });
+        STORE.set("compare", L);
+        paint();
+      }
+      var add = e.target.closest("[data-compare]");
+      if (add) {
+        var t =
+          add.dataset.compare ||
+          (add.closest("[data-game]") && add.closest("[data-game]").dataset.game) ||
+          (document.getElementById("hero-title") && document.getElementById("hero-title").textContent);
+        if (t) window.__featAddCompare(t);
+      }
+    });
+
+    document.getElementById("feat-cmp-clear").addEventListener("click", function () {
+      STORE.set("compare", []);
+      paint();
+    });
+
+    document.getElementById("feat-cmp-go").addEventListener("click", function () {
+      var L = list();
+      if (L.length < 2) {
+        toast("Pick at least 2 games");
+        return;
+      }
+      var rows = [
+        ["Title", "Rating", "Price", "Genre", "Players", "Size", "Tags"]
+      ];
+      L.forEach(function (t) {
+        var g = getGame(t) || {};
+        var p = g.price || {};
+        var price = p.now || p.value || "—";
+        if (typeof price === "number") price = "$" + price;
+        rows.push([
+          t,
+          g.rating != null ? "★ " + g.rating : "—",
+          String(price),
+          g.genre || "—",
+          g.players || "—",
+          g.size || "—",
+          (g.tags || []).slice(0, 4).join(", ") || "—"
+        ]);
+      });
+      var html =
+        '<button type="button" class="feat-modal__x" data-cmp-close aria-label="Close">×</button><h2>Compare games</h2><div class="feat-cmp-table-wrap"><table class="feat-cmp-table"><thead><tr>' +
+        rows[0]
+          .map(function (h) {
+            return "<th>" + esc(h) + "</th>";
+          })
+          .join("") +
+        "</tr></thead><tbody>";
+      for (var i = 1; i < rows.length; i++) {
+        html +=
+          "<tr>" +
+          rows[i]
+            .map(function (c, j) {
+              return (j === 0 ? "<th>" : "<td>") + esc(c) + (j === 0 ? "</th>" : "</td>");
+            })
+            .join("") +
+          "</tr>";
+      }
+      html += "</tbody></table></div>";
+      document.getElementById("feat-cmp-body").innerHTML = html;
+      modal.hidden = false;
+    });
+
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal || e.target.closest("[data-cmp-close]")) modal.hidden = true;
+    });
+  }
+
+  /* ---------- GLOBAL: coupons ---------- */
+  var COUPONS = {
+    VORTEX10: { off: 10, label: "10% off cart" },
+    WEEKEND20: { off: 20, label: "20% weekend deal" },
+    NEWPLAYER: { off: 15, label: "15% for new players" },
+    STREAK5: { off: 5, label: "5% streak bonus" }
+  };
+
+  function featCoupons() {
+    // Hook into cart if present
+    function inject() {
+      var cart = document.querySelector(".cart, [data-cart], #cart, .drawer--cart");
+      if (!cart || cart.querySelector("#feat-coupon")) return;
+      var box = document.createElement("div");
+      box.className = "feat-coupon";
+      box.innerHTML =
+        '<label for="feat-coupon">Coupon code</label>' +
+        '<div class="feat-coupon__row">' +
+        '<input id="feat-coupon" class="feat-input" placeholder="e.g. VORTEX10" autocomplete="off">' +
+        '<button type="button" class="btn btn--ghost btn--small" id="feat-coupon-apply">Apply</button>' +
+        "</div>" +
+        '<p class="feat-coupon__hint" id="feat-coupon-msg"></p>';
+      var footer = cart.querySelector(".cart__footer, .drawer__foot, [data-cart-total]") || cart;
+      footer.parentNode.insertBefore(box, footer);
+      document.getElementById("feat-coupon-apply").addEventListener("click", function () {
+        var code = (document.getElementById("feat-coupon").value || "").trim().toUpperCase();
+        var msg = document.getElementById("feat-coupon-msg");
+        if (COUPONS[code]) {
+          STORE.set("coupon", code);
+          msg.textContent = "✓ " + COUPONS[code].label + " applied";
+          msg.className = "feat-coupon__hint is-ok";
+          toast("Coupon " + code + " applied");
+        } else {
+          STORE.set("coupon", null);
+          msg.textContent = "Unknown code. Try VORTEX10 or WEEKEND20";
+          msg.className = "feat-coupon__hint is-bad";
+        }
+      });
+    }
+    inject();
+    var mo = new MutationObserver(inject);
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ---------- GLOBAL: share / copy link ---------- */
+  function featShare() {
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-share]");
+      if (!b) return;
+      var title =
+        b.dataset.share ||
+        (b.closest("[data-game]") && b.closest("[data-game]").dataset.game) ||
+        (document.getElementById("hero-title") && document.getElementById("hero-title").textContent) ||
+        document.title;
+      var url = location.origin + location.pathname + "?game=" + encodeURIComponent(title);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+          function () {
+            toast("Link copied: " + title);
+          },
+          function () {
+            prompt("Copy link:", url);
+          }
+        );
+      } else {
+        prompt("Copy link:", url);
+      }
+    });
+  }
+
+  /* ---------- GLOBAL: game of the day ---------- */
+  function featGameOfDay() {
+    function pick() {
+      var titles = gameTitles().filter(function (t) {
+        var g = getGame(t);
+        return g && !g.upcoming;
+      });
+      if (!titles.length) {
+        toast("Catalog not ready yet");
+        return;
+      }
+      var day = new Date().toISOString().slice(0, 10);
+      var seed = day.split("-").reduce(function (a, b) {
+        return a + parseInt(b, 10);
+      }, 0);
+      var t = titles[seed % titles.length];
+      var g = getGame(t) || {};
+      var modal = document.getElementById("feat-gotd-modal");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "feat-gotd-modal";
+        modal.className = "feat-modal";
+        document.body.appendChild(modal);
+      }
+      var p = g.price || {};
+      var price = p.now || (p.value != null ? "$" + p.value : "—");
+      modal.innerHTML =
+        '<div class="feat-modal__card">' +
+        '<button type="button" class="feat-modal__x" data-gotd-close>×</button>' +
+        '<p class="hero__kicker">Game of the day · ' +
+        esc(day) +
+        "</p>" +
+        "<h2>" +
+        esc(t) +
+        "</h2>" +
+        "<p>" +
+        esc(g.short || g.about || "") +
+        "</p>" +
+        '<p><b>' +
+        esc(String(price)) +
+        "</b> · ★ " +
+        esc(String(g.rating || "—")) +
+        " · " +
+        esc(g.genre || "") +
+        "</p>" +
+        '<div class="feat-modal__actions">' +
+        '<button type="button" class="btn btn--primary" data-buy="' +
+        esc(t) +
+        '">Add to cart</button>' +
+        '<button type="button" class="btn btn--ghost" data-wish data-game="' +
+        esc(t) +
+        '">Wishlist</button>' +
+        '<button type="button" class="btn btn--ghost" data-compare="' +
+        esc(t) +
+        '">Compare</button>' +
+        "</div></div>";
+      modal.hidden = false;
+      modal.onclick = function (e) {
+        if (e.target === modal || e.target.closest("[data-gotd-close]")) modal.hidden = true;
+      };
+    }
+    window.__featGameOfDay = pick;
+  }
+
+  /* ---------- GLOBAL: inject action buttons on game cards ---------- */
+  function featCardActions() {
+    function enhance() {
+      document.querySelectorAll("[data-game], .card, article.card").forEach(function (card) {
+        if (card.querySelector(".feat-card-actions")) return;
+        var title = card.dataset.game || (card.querySelector(".card__title, h3, h2") && card.querySelector(".card__title, h3, h2").textContent.trim());
+        if (!title) return;
+        if (!card.dataset.game) card.dataset.game = title;
+        var bar = document.createElement("div");
+        bar.className = "feat-card-actions";
+        bar.innerHTML =
+          '<button type="button" class="feat-icon-btn" data-compare="' +
+          esc(title) +
+          '" title="Compare">⇄</button>' +
+          '<button type="button" class="feat-icon-btn" data-share="' +
+          esc(title) +
+          '" title="Share">↗</button>';
+        card.appendChild(bar);
+      });
+    }
+    enhance();
+    var mo = new MutationObserver(function () {
+      enhance();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ---------- HOME extras: genre filter + game of day button ---------- */
+  function featHomeExtra() {
+    var main = document.querySelector("main.shell");
+    if (!main) return;
+    var bar = document.querySelector(".feat-bar__row");
+    if (bar && !document.getElementById("feat-gotd-btn")) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "btn btn--ghost";
+      b.id = "feat-gotd-btn";
+      b.textContent = "🎯 Game of the day";
+      bar.appendChild(b);
+      b.addEventListener("click", function () {
+        if (window.__featGameOfDay) window.__featGameOfDay();
+      });
+    }
+
+    // Genre filter chips
+    if (document.getElementById("feat-genres")) return;
+    var section = document.createElement("div");
+    section.className = "feat-genres section";
+    section.id = "feat-genres";
+    section.innerHTML = '<p class="feat-genres__label">Filter by tag</p><div class="feat-chips" id="feat-genre-chips"></div>';
+    var deals = document.getElementById("deals");
+    if (deals && deals.parentElement) {
+      deals.parentElement.insertBefore(section, deals);
+    } else {
+      var fb = document.querySelector(".feat-bar");
+      if (fb) fb.after(section);
+    }
+
+    function collectTags() {
+      var counts = {};
+      gameTitles().forEach(function (t) {
+        var g = getGame(t);
+        if (!g || !g.tags) return;
+        g.tags.forEach(function (tag) {
+          counts[tag] = (counts[tag] || 0) + 1;
+        });
+      });
+      // also from DOM cards
+      document.querySelectorAll("[data-game]").forEach(function () {});
+      return Object.keys(counts)
+        .sort(function (a, b) {
+          return counts[b] - counts[a];
+        })
+        .slice(0, 12);
+    }
+
+    var active = null;
+    function paintChips() {
+      var tags = collectTags();
+      var box = document.getElementById("feat-genre-chips");
+      if (!box) return;
+      if (!tags.length) {
+        // retry after catalog paints
+        setTimeout(paintChips, 600);
+        return;
+      }
+      box.innerHTML =
+        '<button type="button" class="feat-chip' +
+        (active ? "" : " is-on") +
+        '" data-tag="">All</button>' +
+        tags
+          .map(function (t) {
+            return (
+              '<button type="button" class="feat-chip' +
+              (active === t ? " is-on" : "") +
+              '" data-tag="' +
+              esc(t) +
+              '">' +
+              esc(t) +
+              "</button>"
+            );
+          })
+          .join("");
+    }
+    paintChips();
+    setTimeout(paintChips, 1200);
+
+    document.getElementById("feat-genre-chips").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-tag]");
+      if (!btn) return;
+      active = btn.dataset.tag || null;
+      paintChips();
+      document.querySelectorAll(".grid .card, .grid [data-game], #deals > *, #fresh > *, .chart > *").forEach(function (card) {
+        if (!active) {
+          card.style.display = "";
+          return;
+        }
+        var title = card.dataset.game || (card.querySelector(".card__title, h3") && card.querySelector(".card__title, h3").textContent.trim());
+        var g = title && getGame(title);
+        var tags = (g && g.tags) || [];
+        var text = card.textContent;
+        var ok = tags.indexOf(active) >= 0 || text.indexOf(active) >= 0;
+        card.style.display = ok ? "" : "none";
+      });
+      toast(active ? "Filter: " + active : "All games");
+    });
+  }
+
+  /* ---------- LIBRARY extras: notes ---------- */
+  function featLibraryNotes() {
+    function notes() {
+      return STORE.get("notes", {});
+    }
+    function enhance() {
+      document.querySelectorAll("[data-game], .lib-card, .library .card").forEach(function (card) {
+        if (card.querySelector("[data-note-btn]")) return;
+        var title = card.dataset.game || (card.querySelector("h3,h2,.card__title") && card.querySelector("h3,h2,.card__title").textContent.trim());
+        if (!title) return;
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn btn--ghost btn--small";
+        btn.dataset.noteBtn = title;
+        var n = notes()[title];
+        btn.textContent = n ? "📝 Note" : "📝 Add note";
+        card.appendChild(btn);
+      });
+    }
+    enhance();
+    var mo = new MutationObserver(enhance);
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-note-btn]");
+      if (!b) return;
+      var title = b.dataset.noteBtn;
+      var all = notes();
+      var current = all[title] || "";
+      var next = prompt("Personal note for «" + title + "»:", current);
+      if (next === null) return;
+      next = next.trim();
+      if (next) all[title] = next;
+      else delete all[title];
+      STORE.set("notes", all);
+      b.textContent = next ? "📝 Note" : "📝 Add note";
+      toast(next ? "Note saved" : "Note removed");
+    });
+  }
+
+  /* ---------- PROFILE extras: streak display + coupon list ---------- */
+  function featProfileExtra() {
+    var main = document.querySelector("main.shell, .profile, [data-page='profile']");
+    var actions = document.querySelector(".feat-tools, .profile__actions, .page-head");
+    if (!actions) return;
+    var streak = STORE.get("streak", { count: 0, best: 0 });
+    var box = document.createElement("div");
+    box.className = "feat-streak-card";
+    box.innerHTML =
+      "<h3>🔥 Daily streak</h3>" +
+      "<p><b>" +
+      (streak.count || 0) +
+      "</b> days current · best <b>" +
+      (streak.best || 0) +
+      "</b></p>" +
+      "<p class='feat-muted'>Coupons: <code>VORTEX10</code> · <code>WEEKEND20</code> · <code>NEWPLAYER</code></p>" +
+      (streak.count >= 5
+        ? "<p class='feat-muted'>Streak ≥5 → use code <code>STREAK5</code></p>"
+        : "");
+    actions.after(box);
+  }
+
+  /* ---------- HISTORY extras: stats ---------- */
+  function featHistoryStats() {
+    var head = document.querySelector(".page-head, .feat-tools");
+    if (!head || document.getElementById("feat-hist-stats")) return;
+    var stats = document.createElement("div");
+    stats.id = "feat-hist-stats";
+    stats.className = "feat-hist-stats";
+    head.after(stats);
+    function paint() {
+      var list = [];
+      if (window.VP && window.VP.readHistory) list = window.VP.readHistory() || [];
+      var total = list.length;
+      var secs = list.reduce(function (s, x) {
+        return s + (x.dur || 0);
+      }, 0);
+      var hours = (secs / 3600).toFixed(1);
+      var top = {};
+      list.forEach(function (x) {
+        top[x.title] = (top[x.title] || 0) + 1;
+      });
+      var ranked = Object.keys(top).sort(function (a, b) {
+        return top[b] - top[a];
+      });
+      stats.innerHTML =
+        "<span><b>" +
+        total +
+        "</b> sessions</span>" +
+        "<span><b>" +
+        hours +
+        "h</b> played</span>" +
+        (ranked[0] ? "<span>Most played: <b>" + esc(ranked[0]) + "</b></span>" : "");
+    }
+    paint();
+    document.addEventListener("vp:history", paint);
+  }
+
+
   /* boot */
   function boot() {
     var page = document.body && document.body.dataset.page;
     try {
-      if (page === "home") featHome();
+      featTheme();
+      featShortcuts();
+      featStreak();
+      featCompare();
+      featCoupons();
+      featShare();
+      featGameOfDay();
+      featCardActions();
+      if (page === "home") { featHome(); featHomeExtra(); }
       else if (page === "news") featNews();
-      else if (page === "library") featLibrary();
-      else if (page === "history") featHistory();
-      else if (page === "profile") featProfile();
+      else if (page === "library") { featLibrary(); featLibraryNotes(); }
+      else if (page === "history") { featHistory(); featHistoryStats(); }
+      else if (page === "profile") { featProfile(); featProfileExtra(); }
       else if (page === "explore") featExplore();
     } catch (err) {
       console.error("features:", err);

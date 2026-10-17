@@ -1363,6 +1363,215 @@
     "langs": "English, Russian, 日本語",
     "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-9400", "ram": "12 GB", "gpu": "GTX 1660", "disk": "52 GB SSD"},
     "price": {"now": "$29.90", "value": 29.9}
+  },
+  "Wild Coast": {
+    "img": "images/far-cry-4.jpg",
+    "shots": ["images/stalker-2.jpg", "images/borderlands.jpg", "images/gta-5.jpg"],
+    "genre": "Open world · Action",
+    "tags": ["Open world", "Action", "Exploration", "Vehicles"],
+    "short": "A lawless archipelago where every island has its own rules.",
+    "about": "Steal boats, build outposts and decide who rules the coastline. Dynamic weather and faction wars change the map every few hours.",
+    "features": ["Large open world", "Faction wars", "Boat & car combat", "Co-op raids"],
+    "studio": "Tidebreak",
+    "publisher": "Northlight",
+    "release": "May 15, 2026",
+    "size": 72,
+    "rating": 4.5,
+    "reviews": 11200,
+    "players": "1–4",
+    "langs": "English, Russian, Español",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-9600", "ram": "12 GB", "gpu": "GTX 1660", "disk": "72 GB SSD"},
+    "price": {"off": "−25%", "old": "$34.90", "now": "$26.17", "value": 26.17}
+  },
+  "Paper Trails": {
+    "img": "images/machinarium.jpg",
+    "shots": ["images/folklore.jpg", "images/little-nightmares.jpg", "images/shadow-of-the-colossus.jpg"],
+    "genre": "Puzzle · Adventure",
+    "tags": ["Puzzle", "Adventure", "Hand-drawn", "Story"],
+    "short": "Solve paper-craft mysteries in a city made of folded maps.",
+    "about": "Every room is a puzzle made of paper, ink and light. Unfold letters, fold bridges and uncover a gentle story about memory.",
+    "features": ["Hand-drawn art", "No timer pressure", "Hidden endings", "Controller support"],
+    "studio": "Fold Studio",
+    "publisher": "Small Print",
+    "release": "January 8, 2026",
+    "size": 4,
+    "rating": 4.9,
+    "reviews": 8900,
+    "players": "1",
+    "langs": "English, Russian, Français",
+    "req": {"os": "Windows 7+", "cpu": "Dual-core", "ram": "4 GB", "gpu": "Integrated", "disk": "4 GB"},
+    "price": {"off": "−40%", "old": "$14.90", "now": "$8.94", "value": 8.94}
+  },
+  "Night Circuit": {
+    "img": "images/sonic-unleashed.jpg",
+    "shots": ["images/watch-dogs-legion.jpg", "images/gta-5.jpg", "images/borderlands.jpg"],
+    "genre": "Racing · Arcade",
+    "tags": ["Racing", "Arcade", "Neon", "Multiplayer"],
+    "short": "Neon streets, illegal races and one last chance to clear your name.",
+    "about": "Arcade racing through a glowing city at night. Drift, boost and outrun the law in a 20-event story campaign.",
+    "features": ["Story campaign", "Online races", "Car tuning", "Ghost challenges"],
+    "studio": "Voltage Lab",
+    "publisher": "VORTEX Originals",
+    "release": "October 3, 2025",
+    "size": 28,
+    "rating": 4.3,
+    "reviews": 6400,
+    "players": "1–8",
+    "langs": "English, Russian, 日本語",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-7500", "ram": "8 GB", "gpu": "GTX 1050", "disk": "28 GB"},
+    "price": {"off": "−30%", "old": "$19.90", "now": "$13.93", "value": 13.93}
+  },
+  "Colossus Rest": {
+    "img": "images/shadow-of-the-colossus.jpg",
+    "shots": ["images/dark-souls.jpg", "images/witcher-3.jpg", "images/folklore.jpg"],
+    "genre": "Adventure · Exploration",
+    "tags": ["Adventure", "Exploration", "Boss fights", "Minimal"],
+    "short": "Climb sleeping giants to wake a forgotten land.",
+    "about": "Sparse dialogue, vast landscapes and sixteen colossi. The journey is the story.",
+    "features": ["16 unique bosses", "Open world", "Atmospheric score", "Photo mode"],
+    "studio": "Quiet Peak",
+    "publisher": "Northlight",
+    "release": "February 20, 2025",
+    "size": 18,
+    "rating": 4.8,
+    "reviews": 22100,
+    "players": "1",
+    "langs": "English, Russian, 日本語",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-8400", "ram": "8 GB", "gpu": "GTX 1060", "disk": "18 GB SSD"},
+    "price": {"now": "$24.90", "value": 24.9}
+  },
+  "Border Run": {
+    "img": "images/borderlands.jpg",
+    "shots": ["images/far-cry-4.jpg", "images/stalker-2.jpg", "images/guardians-of-the-galaxy.jpg"],
+    "genre": "Looter shooter · Co-op",
+    "tags": ["Looter shooter", "Co-op", "Humor", "Classes"],
+    "short": "Four vault hunters, infinite guns and one very bad planet.",
+    "about": "Drop in, loot everything, and try not to die to the local wildlife. Class skills and chaotic co-op keep every run different.",
+    "features": ["4-player co-op", "Hundreds of guns", "Class skills", "Raid bosses"],
+    "studio": "Dustworks",
+    "publisher": "VORTEX Originals",
+    "release": "June 11, 2026",
+    "size": 55,
+    "rating": 4.6,
+    "reviews": 18700,
+    "players": "1–4",
+    "langs": "English, Russian, Deutsch",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i5-9400", "ram": "12 GB", "gpu": "GTX 1660", "disk": "55 GB SSD"},
+    "price": {"off": "−15%", "old": "$39.90", "now": "$33.91", "value": 33.91}
+  },
+  "Final Horizon": {
+    "img": "images/final-fantasy-xv.jpg",
+    "shots": ["images/guardians-of-the-galaxy.jpg", "images/witcher-3.jpg", "images/assassins-creed-valhalla.jpg"],
+    "genre": "JRPG · Story",
+    "tags": ["JRPG", "Story", "Party", "Open world"],
+    "short": "A road trip across a dying kingdom with friends who feel like family.",
+    "about": "Camp under the stars, cook meals, fight monsters and uncover a conspiracy that reaches the throne. Turn-based combat with real-time flourishes.",
+    "features": ["Open world", "Party bonds", "Camping system", "Multiple endings"],
+    "studio": "Lumen Path",
+    "publisher": "Northlight",
+    "release": "December 5, 2025",
+    "size": 85,
+    "rating": 4.7,
+    "reviews": 30400,
+    "players": "1",
+    "langs": "English, Russian, 日本語",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i7-8700", "ram": "16 GB", "gpu": "RTX 2060", "disk": "85 GB SSD"},
+    "price": {"off": "−20%", "old": "$49.90", "now": "$39.92", "value": 39.92}
+  },
+  "Bat Signal": {
+    "img": "images/batman-arkham-knight.jpg",
+    "shots": ["images/watch-dogs-legion.jpg", "images/dishonored.jpg", "images/assassins-creed-valhalla.jpg"],
+    "genre": "Action · Stealth",
+    "tags": ["Action", "Stealth", "Open world", "Detective"],
+    "short": "One night, one city, every street under your watch.",
+    "about": "Grapple across rooftops, interrogate suspects and take down gangs without ever firing a shot. The city reacts to every choice.",
+    "features": ["Grapple traversal", "Detective mode", "Stealth takedowns", "Boss confrontations"],
+    "studio": "Nightwatch",
+    "publisher": "VORTEX Originals",
+    "release": "September 1, 2025",
+    "size": 48,
+    "rating": 4.6,
+    "reviews": 27800,
+    "players": "1",
+    "langs": "English, Russian, Français",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-8400", "ram": "8 GB", "gpu": "GTX 1060", "disk": "48 GB"},
+    "price": {"off": "−35%", "old": "$29.90", "now": "$19.43", "value": 19.43}
+  },
+  "Little Echo": {
+    "img": "images/little-nightmares.jpg",
+    "shots": ["images/machinarium.jpg", "images/folklore.jpg", "images/resident-evil-3.jpg"],
+    "genre": "Horror · Puzzle",
+    "tags": ["Horror", "Puzzle", "Atmosphere", "Story"],
+    "short": "A tiny figure in a world built for something much larger.",
+    "about": "Sneak, hide and solve environmental puzzles in a twisted fairytale. Atmosphere is the real enemy.",
+    "features": ["Atmospheric horror", "Hand-crafted levels", "No combat", "Short campaign"],
+    "studio": "Quiet Peak",
+    "publisher": "Small Print",
+    "release": "March 22, 2025",
+    "size": 6,
+    "rating": 4.8,
+    "reviews": 15400,
+    "players": "1",
+    "langs": "English, Russian, Deutsch",
+    "req": {"os": "Windows 7+", "cpu": "Dual-core", "ram": "4 GB", "gpu": "GTX 750", "disk": "6 GB"},
+    "price": {"off": "−50%", "old": "$16.90", "now": "$8.45", "value": 8.45}
+  },
+  "Witch Path": {
+    "img": "images/witcher-3.jpg",
+    "shots": ["images/dark-souls.jpg", "images/assassins-creed-valhalla.jpg", "images/final-fantasy-xv.jpg"],
+    "genre": "RPG · Open world",
+    "tags": ["RPG", "Open world", "Story", "Choices"],
+    "short": "Contracts, choices and a continent that remembers what you did.",
+    "about": "A mature open-world RPG where side quests can matter more than the main plot. Monster hunting, politics and personal consequences.",
+    "features": ["Huge open world", "Meaningful choices", "Monster contracts", "Expansions included"],
+    "studio": "Northlight",
+    "publisher": "Northlight",
+    "release": "May 19, 2025",
+    "size": 50,
+    "rating": 4.9,
+    "reviews": 89000,
+    "players": "1",
+    "langs": "English, Russian, Polski",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-8400", "ram": "8 GB", "gpu": "GTX 1060", "disk": "50 GB"},
+    "price": {"off": "−45%", "old": "$39.90", "now": "$21.94", "value": 21.94}
+  },
+  "Stalker Zone": {
+    "img": "images/stalker-2.jpg",
+    "shots": ["images/far-cry-4.jpg", "images/borderlands.jpg", "images/doom.jpg"],
+    "genre": "FPS · Survival",
+    "tags": ["FPS", "Survival", "Open world", "Anomalies"],
+    "short": "Enter the Zone. Bring artifacts out. Try not to become one.",
+    "about": "A living exclusion zone full of mutants, factions and deadly anomalies. Scavenge, trade and survive the night.",
+    "features": ["Open world Zone", "Anomaly system", "Faction reputation", "A-life AI"],
+    "studio": "GSC Legacy",
+    "publisher": "VORTEX Originals",
+    "release": "November 20, 2025",
+    "size": 130,
+    "rating": 4.4,
+    "reviews": 42000,
+    "players": "1",
+    "langs": "English, Russian, Українська",
+    "req": {"os": "Windows 10 64-bit", "cpu": "Intel i7-9700", "ram": "16 GB", "gpu": "RTX 2070", "disk": "130 GB SSD"},
+    "price": {"now": "$49.90", "value": 49.9}
+  },
+  "Legion City": {
+    "img": "images/watch-dogs-legion.jpg",
+    "shots": ["images/gta-5.jpg", "images/batman-arkham-knight.jpg", "images/assassins-creed-valhalla.jpg"],
+    "genre": "Open world · Hacking",
+    "tags": ["Open world", "Hacking", "Stealth", "Recruit"],
+    "short": "Anyone can be a hero. Recruit the whole city.",
+    "about": "Build a resistance by recruiting anyone on the street. Each operative has unique skills and a personal story.",
+    "features": ["Recruit system", "Hacking tools", "Multiple playstyles", "Online co-op"],
+    "studio": "Signal Ops",
+    "publisher": "Northlight",
+    "release": "July 8, 2025",
+    "size": 45,
+    "rating": 4.2,
+    "reviews": 19500,
+    "players": "1–2",
+    "langs": "English, Russian, Français",
+    "req": {"os": "Windows 10", "cpu": "Intel i5-8400", "ram": "8 GB", "gpu": "GTX 1060", "disk": "45 GB"},
+    "price": {"off": "−40%", "old": "$34.90", "now": "$20.94", "value": 20.94}
   }
 };
 
@@ -2169,6 +2378,14 @@
 
   
 
+  window.GAMES = GAMES;
+  if (window.VP) {
+    try {
+      window.VP.games = GAMES;
+      if (typeof toast === "function") window.VP.toast = toast;
+    } catch (e) {}
+  }
+
   function page_home() {
     var featured = ["Neon Drifter", "Hollow Signal", "Iron Meridian"];
     var kickers = {
@@ -2177,17 +2394,17 @@
       "Iron Meridian": "“Rift” update"
     };
     var deals = ["Skyfall Requiem", "Paper Kingdoms", "Ghost Harbour", "Static Bloom",
-      "Wasteland Courier", "Pale Mountain Saga", "Underpass Kings", "Night Warden"];
-    var chart = ["Neon Drifter", "Pale Mountain Saga", "Iron Meridian", "Hollow Signal", "Underpass Kings", "Skyfall Requiem", "Last Bastion"];
+      "Wild Coast", "Paper Trails", "Night Circuit", "Bat Signal", "Witch Path", "Little Echo"];
+    var chart = ["Neon Drifter", "Witch Path", "Iron Meridian", "Hollow Signal", "Stalker Zone", "Skyfall Requiem", "Final Horizon"];
     var fresh = [
       { title: "Dust & Circuit", meta: "Released yesterday" },
       { title: "Lumen Trail", meta: "Released September 12" },
       { title: "Cassette Rally", meta: "Released September 9" },
       { title: "Hex & Honey", meta: "Released September 5" },
-      { title: "Last Bastion", meta: "Released September 1" },
-      { title: "Crimson Arena", meta: "Released August 27" },
-      { title: "Zone Zero", meta: "Released July 24" },
-      { title: "Underpass Kings", meta: "Released June 18" }
+      { title: "Border Run", meta: "Released June 11" },
+      { title: "Wild Coast", meta: "Released May 15" },
+      { title: "Echo Protocol", meta: "Released April 12" },
+      { title: "Paper Trails", meta: "Released January 8" }
     ];
 
     var picker = document.getElementById("hero-picker");
@@ -2497,16 +2714,20 @@
       { title: "Ghost Harbour", state: "Not installed", hours: 9, last: "6 months ago", done: 8 },
       { title: "Static Bloom", state: "Installed", hours: 17, last: "4 days ago", done: 45 },
       { title: "Dust & Circuit", state: "Not installed", hours: 0, last: "never launched", done: 0 },
-      { title: "Pale Mountain Saga", state: "Installed", hours: 203, last: "2 days ago", done: 88 },
-      { title: "Underpass Kings", state: "Installed", hours: 40, last: "5 days ago", done: 27 },
+      { title: "Witch Path", state: "Installed", hours: 203, last: "2 days ago", done: 88 },
+      { title: "Border Run", state: "Installed", hours: 40, last: "5 days ago", done: 27 },
       { title: "Ashen Ring", state: "Installed", hours: 56, last: "today", done: 22 },
       { title: "Cosmic Border", state: "Installed", hours: 91, last: "yesterday", done: 48 },
       { title: "Echo Protocol", state: "Installed", hours: 33, last: "3 days ago", done: 15 },
       { title: "Neon Drift Pro", state: "Installed", hours: 12, last: "today", done: 70 },
-      { title: "Crimson Arena", state: "Updating", hours: 12, last: "a week ago", done: 18 },
-      { title: "Zone Zero", state: "Not installed", hours: 6, last: "2 months ago", done: 5 }
+      { title: "Cage Fury 6", state: "Updating", hours: 12, last: "a week ago", done: 18 },
+      { title: "Little Echo", state: "Not installed", hours: 6, last: "2 months ago", done: 5 },
+      { title: "Final Horizon", state: "Installed", hours: 78, last: "yesterday", done: 41 },
+      { title: "Stalker Zone", state: "Installed", hours: 55, last: "today", done: 19 }
     ];
-    games.forEach(function (game) { game.size = GAMES[game.title].size; });
+    games.forEach(function (game) {
+      game.size = (GAMES[game.title] && GAMES[game.title].size) || 20;
+    });
 
     var DISK_TOTAL = 500;
     var states = ["All games", "Installed", "Updating", "Not installed"];
@@ -2923,7 +3144,11 @@
     "Starfall Guardians": "shooter", "Veil of Lanterns": "breakout",
     "Neon Drift Pro": "racing", "Ashen Ring": "runner", "Cosmic Border": "shooter",
     "Crystal Odyssey": "memory", "Galaxy Guardians": "catch", "Cage Fury 6": "whack",
-    "Echo Protocol": "fps"
+    "Echo Protocol": "fps",
+    "Witch Path": "runner", "Border Run": "fps", "Little Echo": "memory",
+    "Final Horizon": "breakout", "Stalker Zone": "shooter", "Wild Coast": "fps",
+    "Paper Trails": "memory", "Night Circuit": "racing", "Colossus Rest": "runner",
+    "Bat Signal": "runner", "Legion City": "fps"
   };
   var KIND_NAME = {
     racing: "Car racing", shooter: "Space shooter", fps: "First-person tactical shooter", snake: "Snake",
