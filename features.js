@@ -1402,6 +1402,146 @@
 
 
   /* boot */
+
+  /* ---------- AVATAR (photo from gallery) ---------- */
+  function featAvatar() {
+    var KEY = "avatar";
+    var SIZE = 256;
+
+    function paint() {
+      var url = STORE.get(KEY, null);
+      var nodes = document.querySelectorAll("#me-avatar, .session__avatar");
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (url) {
+          if (el.dataset.photo !== url) {
+            el.style.backgroundImage = 'url("' + url + '")';
+            el.dataset.photo = url;
+          }
+          el.classList.add("has-photo");
+        } else if (el.classList.contains("has-photo")) {
+          el.style.backgroundImage = "";
+          el.removeAttribute("data-photo");
+          el.classList.remove("has-photo");
+        }
+      }
+      var rm = document.getElementById("feat-avatar-remove");
+      if (rm) rm.hidden = !url;
+    }
+
+    paint();
+
+    // topbar avatar is re-rendered by app.js on sign-in / wallet changes
+    var session = document.querySelector("[data-session]");
+    if (session && window.MutationObserver) {
+      new MutationObserver(paint).observe(session, { childList: true });
+    }
+    document.addEventListener("vp:signin", paint);
+    document.addEventListener("vp:wallet", paint);
+
+    var big = document.getElementById("me-avatar");
+    if (!big) return; // not the profile page
+
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.hidden = true;
+    input.id = "feat-avatar-input";
+    document.body.appendChild(input);
+
+    function pick() {
+      input.click();
+    }
+
+    big.classList.add("is-editable");
+    big.setAttribute("role", "button");
+    big.setAttribute("tabindex", "0");
+    big.setAttribute("aria-label", "Change profile photo");
+    big.title = "Change photo";
+    big.addEventListener("click", pick);
+    big.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        pick();
+      }
+    });
+
+    var actions = document.querySelector(".card-me__actions");
+    if (actions) {
+      var change = document.createElement("button");
+      change.type = "button";
+      change.className = "btn btn--ghost";
+      change.id = "feat-avatar-change";
+      change.textContent = "Change photo";
+      change.addEventListener("click", pick);
+
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn btn--ghost";
+      remove.id = "feat-avatar-remove";
+      remove.textContent = "Remove photo";
+      remove.hidden = true;
+      remove.addEventListener("click", function () {
+        STORE.set(KEY, null);
+        paint();
+        toast("Photo removed");
+      });
+
+      var anchor = document.getElementById("feat-edit-nick");
+      if (anchor && anchor.parentNode === actions) {
+        actions.insertBefore(change, anchor.nextSibling);
+        actions.insertBefore(remove, change.nextSibling);
+      } else {
+        actions.insertBefore(remove, actions.firstChild);
+        actions.insertBefore(change, actions.firstChild);
+      }
+      paint();
+    }
+
+    // crop to a centered square and shrink, so it fits into localStorage
+    function process(file) {
+      if (!file || !/^image\//.test(file.type)) {
+        toast("Please choose an image file");
+        return;
+      }
+      var reader = new FileReader();
+      reader.onerror = function () {
+        toast("Could not read the file");
+      };
+      reader.onload = function () {
+        var img = new Image();
+        img.onerror = function () {
+          toast("This image format is not supported");
+        };
+        img.onload = function () {
+          var side = Math.min(img.naturalWidth, img.naturalHeight);
+          if (!side) return toast("Could not read the image");
+          var sx = (img.naturalWidth - side) / 2;
+          var sy = (img.naturalHeight - side) / 2;
+          var canvas = document.createElement("canvas");
+          canvas.width = canvas.height = SIZE;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, sx, sy, side, side, 0, 0, SIZE, SIZE);
+          var url = canvas.toDataURL("image/jpeg", 0.88);
+          STORE.set(KEY, url);
+          if (STORE.get(KEY, null) !== url) {
+            toast("Could not save the photo (storage is full)");
+            return;
+          }
+          paint();
+          toast("Profile photo updated");
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    input.addEventListener("change", function () {
+      process(input.files && input.files[0]);
+      input.value = ""; // allow picking the same file again
+    });
+  }
+
   function boot() {
     var page = document.body && document.body.dataset.page;
     try {
@@ -1419,6 +1559,7 @@
       else if (page === "history") { featHistory(); featHistoryStats(); }
       else if (page === "profile") { featProfile(); featProfileExtra(); }
       else if (page === "explore") featExplore();
+      featAvatar();
     } catch (err) {
       console.error("features:", err);
     }

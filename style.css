@@ -2440,3 +2440,42 @@ html.feat-light .feat-fab { background: #fff; border-color: rgba(0,0,0,.12); }
   .feat-compare-tray { bottom: 70px; }
   .feat-fab { bottom: 72px; }
 }
+
+/* ---------- profile photo ---------- */
+.has-photo {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.card-me__avatar { position: relative; overflow: hidden; }
+
+.card-me__avatar.is-editable { cursor: pointer; }
+
+.card-me__avatar.is-editable::after {
+  content: "📷";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  background: rgba(10, 10, 20, .55);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.card-me__avatar.is-editable:hover::after,
+.card-me__avatar.is-editable:focus-visible::after { opacity: 1; }
+
+.card-me__avatar.is-editable:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+
+@media (hover: none) {
+  .card-me__avatar.is-editable::after {
+    inset: auto 0 0 0;
+    height: 28px;
+    font-size: 15px;
+    opacity: 1;
+  }
+}
