@@ -3099,7 +3099,7 @@
     if (typeof toast === "function") toast("Saved to play history: " + title);
   }
 
-  // Expose for other game engines (fpgames / refresh)
+  // Expose for other game engines 
   if (window.VP) {
     window.VP.recordPlay = recordPlay;
     window.VP.readHistory = readHistory;
@@ -3133,25 +3133,25 @@
   /* Each library game opens its own mini-game, chosen by genre */
   var KIND_OF = {
     "Neon Drifter": "racing", "Cassette Rally": "racing",
-    "Skyfall Requiem": "fps", "Hollow Signal": "fps",
+    "Skyfall Requiem": "shooter", "Hollow Signal": "snake",
     "Static Bloom": "snake", "Hex & Honey": "memory",
     "Iron Meridian": "breakout", "Paper Kingdoms": "memory",
     "Ghost Harbour": "runner", "Lumen Trail": "catch",
     "Dust & Circuit": "racing",
-    "Underpass Kings": "racing", "Last Bastion": "fps", "Night Warden": "whack",
-    "Verdant Frontier": "snake", "Wasteland Courier": "fps", "Pale Mountain Saga": "runner",
+    "Underpass Kings": "racing", "Last Bastion": "breakout", "Night Warden": "whack",
+    "Verdant Frontier": "snake", "Wasteland Courier": "catch", "Pale Mountain Saga": "runner",
     "Zone Zero": "shooter", "Crimson Arena": "whack", "Blade of Ember": "runner",
     "Starfall Guardians": "shooter", "Veil of Lanterns": "breakout",
     "Neon Drift Pro": "racing", "Ashen Ring": "runner", "Cosmic Border": "shooter",
     "Crystal Odyssey": "memory", "Galaxy Guardians": "catch", "Cage Fury 6": "whack",
-    "Echo Protocol": "fps",
-    "Witch Path": "runner", "Border Run": "fps", "Little Echo": "memory",
-    "Final Horizon": "breakout", "Stalker Zone": "shooter", "Wild Coast": "fps",
+    "Echo Protocol": "whack",
+    "Witch Path": "runner", "Border Run": "runner", "Little Echo": "memory",
+    "Final Horizon": "breakout", "Stalker Zone": "shooter", "Wild Coast": "catch",
     "Paper Trails": "memory", "Night Circuit": "racing", "Colossus Rest": "runner",
-    "Bat Signal": "runner", "Legion City": "fps"
+    "Bat Signal": "runner", "Legion City": "memory"
   };
   var KIND_NAME = {
-    racing: "Car racing", shooter: "Space shooter", fps: "First-person tactical shooter", snake: "Snake",
+    racing: "Car racing", shooter: "Space shooter", snake: "Snake",
     memory: "Memory match", runner: "Endless runner", catch: "Orb catcher",
     breakout: "Brick breaker", whack: "Target tap"
   };
@@ -3570,49 +3570,6 @@
           ctx.beginPath(); ctx.arc(it.x, it.y, it.r + 7, -1.5708, -1.5708 + 6.283 * left); ctx.stroke();
         });
       }
-    },
-
-    /* ---------- First-person bot shooter ---------- */
-    fps: {
-      help: "FIRST-PERSON 3D-STYLE MISSION: WASD to walk, Shift to sprint, mouse to look, click to shoot, R to restart after defeat. Eliminate 8 enemy bots.",
-      reset: function () {
-        G.px = 3.5; G.py = 3.5; G.angle = 0.15; G.hp = 100; G.ammo = 40; G.kills = 0; G.shotFlash = 0; G.hitFlash = 0; G.enemyClock = 0;
-        G.map = ["111111111111", "100000000001", "101100110101", "100000000001", "101011010101", "100000000001", "101100110101", "100000000001", "111111111111"];
-        G.bots = [ {x:8.5,y:1.8,hp:2},{x:9.3,y:3.5,hp:2},{x:2.4,y:5.4,hp:2},{x:8.5,y:6.8,hp:2},{x:5.5,y:1.7,hp:2},{x:5.7,y:7.3,hp:2},{x:1.7,y:3.2,hp:2},{x:10,y:5.2,hp:2} ];
-        G.lives = 3; G.score = 0; G.lastMouseX = null; G.damageWait = 0;
-      },
-      wall: function(x,y){ return !G.map[Math.floor(y)] || G.map[Math.floor(y)][Math.floor(x)] !== "0"; },
-      update: function(dt) {
-        var speed=(G.keys.Shift ? 3.6 : 2.25)*dt, ca=Math.cos(G.angle), sa=Math.sin(G.angle), nx=G.px, ny=G.py;
-        if(G.keys.ArrowLeft) G.angle-=1.8*dt; if(G.keys.ArrowRight) G.angle+=1.8*dt;
-        if(G.keys.KeyA || G.keys.a) { nx += Math.cos(G.angle-1.5708)*speed; ny += Math.sin(G.angle-1.5708)*speed; }
-        if(G.keys.KeyD || G.keys.d) { nx += Math.cos(G.angle+1.5708)*speed; ny += Math.sin(G.angle+1.5708)*speed; }
-        if(G.keys.KeyW || G.keys.w || G.keys.ArrowUp) { nx += ca*speed; ny += sa*speed; }
-        if(G.keys.KeyS || G.keys.s || G.keys.ArrowDown) { nx -= ca*speed; ny -= sa*speed; }
-        if(!this.wall(nx,G.py)) G.px=nx; if(!this.wall(G.px,ny)) G.py=ny;
-        G.shotFlash=Math.max(0,G.shotFlash-dt); G.hitFlash=Math.max(0,G.hitFlash-dt); G.damageWait-=dt;
-        G.bots.forEach(function(b){ if(b.hp<=0)return; var dx=G.px-b.x,dy=G.py-b.y,d=Math.hypot(dx,dy); if(d>0.8){var v=0.32*dt;b.x+=dx/d*v;b.y+=dy/d*v;} if(d<1.0 && G.damageWait<=0){G.hp-=12;G.damageWait=0.7;G.hitFlash=0.18;document.getElementById("arcade-lives").textContent=Math.max(0,Math.ceil(G.hp/34));if(G.hp<=0)arcadeOver(false);} });
-        if(G.kills>=8 && G.state==="playing"){G.score=G.kills*100+Math.max(0,G.hp);arcadeHud();arcadeOver(true);}
-      },
-      click: function(){
-        if(G.state!=="playing")return; if(G.ammo<=0){gameMsg("OUT OF AMMO","Mission failed — restart to reload.");return;}
-        G.ammo--;G.shotFlash=0.12;var best=null,bestDiff=0.15;
-        G.bots.forEach(function(b){if(b.hp<=0)return;var dx=b.x-G.px,dy=b.y-G.py,dist=Math.hypot(dx,dy),a=Math.atan2(dy,dx)-G.angle;a=Math.atan2(Math.sin(a),Math.cos(a));if(Math.abs(a)<bestDiff && dist<7){best=b;bestDiff=Math.abs(a);}});
-        if(best){best.hp--;if(best.hp<=0){G.kills++;G.score=G.kills*100;arcadeHud();} }
-        if(G.ammo===0 && G.kills<8){gameMsg("MAGAZINE EMPTY","You need to restart the mission.");}
-      },
-      draw: function(ctx){
-        var w=640,h=400;var sky=ctx.createLinearGradient(0,0,0,220);sky.addColorStop(0,"#071226");sky.addColorStop(1,"#31546c");ctx.fillStyle=sky;ctx.fillRect(0,0,w,200);
-        var floor=ctx.createLinearGradient(0,200,0,h);floor.addColorStop(0,"#263641");floor.addColorStop(1,"#090d15");ctx.fillStyle=floor;ctx.fillRect(0,200,w,200);
-        var depths=[],rays=160,fov=1.12;
-        for(var i=0;i<rays;i++){var a=G.angle-fov/2+fov*i/rays,dx=Math.cos(a),dy=Math.sin(a),d=0,hit=false;while(d<12&&!hit){d+=0.035;hit=this.wall(G.px+dx*d,G.py+dy*d);}d*=Math.cos(a-G.angle);depths[i]=d;var wh=Math.min(400,260/d),shade=Math.max(24,125-d*10);ctx.fillStyle="rgb("+(shade*.48|0)+","+(shade*.78|0)+","+(shade|0)+")";ctx.fillRect(i*w/rays,200-wh/2,w/rays+1,wh);if((i%8)<2){ctx.fillStyle="rgba(120,220,255,.09)";ctx.fillRect(i*w/rays,200-wh/2,w/rays+1,wh);}}
-        G.bots.forEach(function(b){if(b.hp<=0)return;var dx=b.x-G.px,dy=b.y-G.py,dist=Math.hypot(dx,dy),a=Math.atan2(dy,dx)-G.angle;a=Math.atan2(Math.sin(a),Math.cos(a));if(Math.abs(a)>fov/2+0.2)return;var sx=w/2+a/fov*w,sz=Math.min(150,95/dist),sy=200;var ri=Math.max(0,Math.min(rays-1,Math.floor(sx/w*rays)));if(dist>depths[ri]+0.2)return;ctx.fillStyle="#1a202b";ctx.fillRect(sx-sz*.28,sy-sz*.08,sz*.56,sz*.8);ctx.fillStyle="#d94e58";ctx.fillRect(sx-sz*.23,sy-sz*.42,sz*.46,sz*.38);ctx.fillStyle="#ffdbb1";ctx.fillRect(sx-sz*.17,sy-sz*.38,sz*.34,sz*.2);ctx.fillStyle="#6fffe0";ctx.fillRect(sx-sz*.18,sy-sz*.32,sz*.08,sz*.05);ctx.fillRect(sx+sz*.1,sy-sz*.32,sz*.08,sz*.05);ctx.fillStyle="#ef5361";ctx.fillRect(sx-sz*.25,sy-sz*.5,sz*.5,4);ctx.fillStyle="#57ef9a";ctx.fillRect(sx-sz*.25,sy-sz*.5,sz*.5*(b.hp/2),4);});
-        // weapon silhouette and HUD
-        ctx.fillStyle="#101820";ctx.beginPath();ctx.moveTo(270,400);ctx.lineTo(292,315);ctx.lineTo(347,315);ctx.lineTo(371,400);ctx.fill();ctx.fillStyle="#465868";ctx.fillRect(301,300,38,70);ctx.fillStyle="#192734";ctx.fillRect(311,280,18,48);
-        ctx.strokeStyle=G.shotFlash?"#ffce66":"#e6f6ff";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(310,200);ctx.lineTo(330,200);ctx.moveTo(320,190);ctx.lineTo(320,210);ctx.stroke();
-        ctx.fillStyle="rgba(0,0,0,.6)";ctx.fillRect(12,12,205,56);ctx.fillStyle="#70f5dc";ctx.font="bold 14px Arial";ctx.fillText("OPERATION: IRON VEIL",22,31);ctx.fillStyle="#fff";ctx.font="12px Arial";ctx.fillText("BOTS: "+G.kills+" / 8     AMMO: "+G.ammo,22,49);ctx.fillStyle="#333";ctx.fillRect(22,55,175,6);ctx.fillStyle=G.hp>35?"#52edaa":"#ff526b";ctx.fillRect(22,55,175*Math.max(0,G.hp)/100,6);
-        if(G.hitFlash){ctx.fillStyle="rgba(255,20,50,.2)";ctx.fillRect(0,0,w,h);}
-      }
     }
   };
 
@@ -3649,7 +3606,6 @@
   }
 
   function launchGame(title) {
-    if (window.VPFP && GAMES[title]) { window.VPFP.launch(title); return; }
     if (!arcade || !GAMES[title]) return;
     var hue = 0;
     for (var i = 0; i < title.length; i++) hue += title.charCodeAt(i);
@@ -3762,13 +3718,9 @@
 
     function moveTo(clientX) {
       if (!G) return;
-      if (G.kind === "fps") {
-        if (G.lastMouseX !== null) G.angle += (clientX - G.lastMouseX) * 0.004;
-        G.lastMouseX = clientX;
-      } else G.x = toCanvas(clientX, 0).x;
+      G.x = toCanvas(clientX, 0).x;
     }
     stage.addEventListener("mousemove", function (e) { moveTo(e.clientX); });
-    stage.addEventListener("mouseleave", function () { if (G && G.kind === "fps") G.lastMouseX = null; });
     stage.addEventListener("touchmove", function (e) { e.preventDefault(); moveTo(e.touches[0].clientX); }, { passive: false });
 
     // swipes steer the snake on touch screens
@@ -3785,7 +3737,6 @@
     document.addEventListener("keydown", function (e) {
       if (!G) return;
       if (e.key === "Escape") { closeGame(); return; }
-      if ((e.key === "r" || e.key === "R") && G.kind === "fps") { arcadeStart(); return; }
       var K = MINI[G.kind];
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "w", "a", "s", "d", "W", "A", "S", "D"].indexOf(e.key) !== -1) {
         G.keys[e.key] = true; G.keys[e.code] = true; e.preventDefault();
